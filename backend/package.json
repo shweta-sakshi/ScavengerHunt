@@ -1,0 +1,18 @@
+{
+  "name": "nita_hunt-backend",
+  "version": "1.0.0",
+  "description": "“SHE KNOWS” – A Campus Scavenger Hunt web App that turns college campus into a playground of discovery. Students or faculty members can sign up to solve clues, explore hidden campus gems, and compete in a time-based scavenger hunt.",
+  "main": "Server.js",
+  "scripts": {
+    "start": "nodemon Server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "I/O",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.7.3"
+  }
+}
