@@ -1,5 +1,11 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import React, { useEffect, useRef, useState } from 'react';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-routing-machine';
+import axios from 'axios';
+import io from 'socket.io-client';
 
 const user = {
     name: 'Tom Cook',
@@ -23,7 +29,49 @@ const userNavigation = [
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
+
 const Nav = () => {
+
+    //Connect to your Socket.IO server
+    const socket = io('http://localhost:3000');
+
+    socket.on('newGame', (data) => {
+        showNotification(data.message);
+    });
+
+    // 1. Request permission on page load
+    document.addEventListener("DOMContentLoaded", () => {
+        if (Notification.permission === "default") {
+            Notification.requestPermission();
+        }
+    });
+
+    // 2. Function to show notification
+    function showNotification(gameName) {
+        if (Notification.permission === "granted") {
+            new Notification("New Game Created!", {
+                body: `Check out the new game: ${gameName}`,
+                icon: '/api/s', // Add a relevant icon path if available
+            });
+        }
+    }
+
+    // 3. Function to be called after a new game creation
+    async function notifyGameCreation(gameData) {
+        // Replace this with your actual game creation logic (e.g., an API call)
+        try {
+            const response = await axios.post('/api/create-game', "hey");
+
+            if (response.status === 200) {  // Assuming 201 means created successfully
+                console.log("Done");
+                  // gameData.name contains the new game name
+            }
+        } catch (error) {
+            console.error("Failed to create game:", error);
+        }
+    }
+
+
     return (
         <>
             <div className="min-h-full">
@@ -163,7 +211,18 @@ const Nav = () => {
                     </div>
                 </header>
                 <main>
-                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">{/* Your content */}</div>
+                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                        {/* setting up map */}
+                        {/* <div
+                            ref={mapRef}     // Use the ref to bind Leaflet to the div
+                            id="map"
+                            className="h-64 w-full mt-6 border border-gray-300 rounded-md"
+                        />
+                        <button onClick={saveLocation} disabled={!location}>
+                            Save Location
+                        </button> */}
+                        <button onClick={notifyGameCreation}>Notify me!</button>
+                    </div>
                 </main>
             </div>
         </>
