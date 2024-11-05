@@ -37,41 +37,6 @@ function classNames(...classes) {
 }
 
 const Nav = () => {
-  const socket = io("http://localhost:3000");
-
-  // Request permission for notifications on page load
-  useEffect(() => {
-    if (Notification.permission === "default") {
-      Notification.requestPermission();
-    }
-  }, []);
-
-  // Show notification when a new scavenger hunt is created
-  socket.on("newHunt", (data) => {
-    showNotification(data.message);
-  });
-
-  const showNotification = (message) => {
-    if (Notification.permission === "granted") {
-      new Notification("New Scavenger Hunt!", {
-        body: `A new hunt has started: ${message}`,
-        icon: "/path/to/icon.png",
-      });
-    }
-  };
-
-  const notifyHuntCreation = async () => {
-    try {
-      const response = await axios.post("/api/create-hunt", {
-        name: "Campus Hunt",
-      });
-      if (response.status === 200) {
-        console.log("New hunt created successfully");
-      }
-    } catch (error) {
-      console.error("Failed to create hunt:", error);
-    }
-  };
 
   return (
     <div className="min-h-full">
@@ -197,25 +162,28 @@ const Nav = () => {
         </DisclosurePanel>
       </Disclosure>
 
-      <header className="bg-white shadow">
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-            Campus Scavenger Hunt
-          </h1>
-        </div>
-      </header>
-      <main>
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <button
-            onClick={notifyHuntCreation}
-            className="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700"
-          >
-            Notify me of New Hunts!
-          </button>
-        </div>
-      </main>
-    </div>
-  );
-};
+                <header className="bg-white shadow">
+                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                        <h1 className="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h1>
+                    </div>
+                </header>
+                <main>
+                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                        {/* setting up map */}
+                        {/* <div
+                            ref={mapRef}     // Use the ref to bind Leaflet to the div
+                            id="map"
+                            className="h-64 w-full mt-6 border border-gray-300 rounded-md"
+                        />
+                        <button onClick={saveLocation} disabled={!location}>
+                            Save Location
+                        </button>
+                        <button onClick={notifyGameCreation}>Notify me!</button> */}
+                    </div>
+                </main>
+            </div>
+        </>
+    )
+}
 
 export default Nav;

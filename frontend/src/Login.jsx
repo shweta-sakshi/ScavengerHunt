@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { LoginContext } from "./contextProvider/LoginContext";
+import  mnnitimage  from './assets/mnnit.jpg'
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
@@ -50,22 +51,17 @@ const Login = () => {
 
   return (
     <>
-      <div
-        className="flex min-h-screen items-center justify-center bg-cover bg-center"
-        style={{ backgroundImage: `url('/path/to/your/gaming-bg.jpg')` }}
-      >
-        <div className="bg-gray-900 bg-opacity-80 p-8 rounded-lg shadow-lg max-w-md w-full">
-          <div className="text-center">
-            <img
-              alt="GameZone"
-              src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
-              className="mx-auto h-12 w-auto"
-            />
-            <h2 className="mt-6 text-3xl font-extrabold text-white">
-              Sign in to GameZone
-            </h2>
-            <p className="mt-2 text-sm text-gray-400">Get back in the game!</p>
-          </div>
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <img
+            alt="Your Company"
+            src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
+            className="mx-auto h-10 w-auto"
+          />
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            Sign in to your account
+          </h2>
+        </div>
 
           <form onSubmit={loginUser} className="mt-8 space-y-6">
             <div>

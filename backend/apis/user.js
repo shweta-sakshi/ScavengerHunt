@@ -39,6 +39,8 @@ router.post("/register", async (req, res) => {
 
             //sending token in email;
             try {
+                console.log("inside mail");
+
                 await sendMail({
                     email: finalUser.email,
                     subject: "Activate your NITA_Hunt account",
@@ -81,7 +83,6 @@ router.post("/activation",
 
             const user = await Users.findOne({ email });
             if (user) {
-                console.log(error)
                 res.status(500).json({ message: "user already exist" });
             }
 
