@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import './App.css';
 
 function GamePage() {
     const [gameName, setGameName] = useState("");
