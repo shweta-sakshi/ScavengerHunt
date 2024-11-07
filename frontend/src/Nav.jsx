@@ -6,6 +6,9 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine';
 import axios from 'axios';
 import io from 'socket.io-client';
+import * as tf from '@tensorflow/tfjs';
+import * as poseDetection from '@tensorflow-models/pose-detection';
+
 
 const user = {
     name: 'Tom Cook',
@@ -31,6 +34,70 @@ function classNames(...classes) {
 }
 
 const Nav = () => {
+
+    //user location
+    const mapRef = useRef(null);         // Reference for map container div
+    const mapInstance = useRef(null);    // Reference to store the map instance
+    const markerRef = useRef(null);
+    const [error, setError] = useState(null);
+    const [location, setLocation] = useState({ lat: null, lng: null });
+
+    useEffect(() => {
+        if (!navigator.geolocation) {
+            setError('Geolocation is not supported by this browser.');
+            return;
+        }
+
+        const success = (position) => {
+            const { latitude, longitude } = position.coords;
+            setLocation({ lat: latitude, lng: longitude });
+        };
+
+        const watcher = navigator.geolocation.watchPosition(success, error, {
+            enableHighAccuracy: true,     // Improves accuracy but may impact performance
+            maximumAge: 0,                // Prevents caching of old positions
+            timeout: 5000                 // Maximum wait time for a location response
+        });
+
+        return () => {
+            navigator.geolocation.clearWatch(watcher); // Clean up watcher on component unmount
+        };
+    }, []);
+
+    useEffect(() => {
+        // Initialize map only if the location is set
+        if (location.lat && location.lng && !mapInstance.current) {
+            mapInstance.current = L.map(mapRef.current).setView([location.lat, location.lng], 13);
+
+            // Add the OpenStreetMap tile layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap contributors',
+            }).addTo(mapInstance.current);
+
+            // Add marker to the map
+            markerRef.current = L.marker([location.lat, location.lng], {
+                title: 'Your Location'
+            }).addTo(mapInstance.current);
+
+        } else if (mapInstance.current && markerRef.current) {
+            // Update marker position if location changes
+            markerRef.current.setLatLng([location.lat, location.lng]);
+            mapInstance.current.setView([location.lat, location.lng], 13);
+        }
+    }, [location]);
+
+    const saveLocation = () => {
+        if (location) {
+            axios.post('/api/save-location', location)
+                .then(response => {
+                    console.log('Location saved:', response.data);
+                })
+                .catch(error => {
+                    console.error('Error saving location:', error);
+                });
+        }
+    }
 
     return (
         <>
@@ -173,15 +240,11 @@ const Nav = () => {
                 <main>
                     <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                         {/* setting up map */}
-                        {/* <div
+                        <div
                             ref={mapRef}     // Use the ref to bind Leaflet to the div
                             id="map"
                             className="h-64 w-full mt-6 border border-gray-300 rounded-md"
                         />
-                        <button onClick={saveLocation} disabled={!location}>
-                            Save Location
-                        </button>
-                        <button onClick={notifyGameCreation}>Notify me!</button> */}
                     </div>
                 </main>
             </div>
