@@ -7,6 +7,7 @@ import Activationpage from './Activationpage.jsx'
 import LandingPage from './LandingPage.jsx';
 import EventPage from './EventPage.jsx'
 import GamePage from './GamePage.jsx'
+import GameInfo from './GameInfo.jsx'
 
 
 
@@ -25,6 +26,7 @@ function App() {
           <Route path='/landingPage' element={<LandingPage/>}/>
           <Route path='/eventPage' element={<EventPage/>}/>
           <Route path='/gamePage' element={<GamePage/>}/>
+          <Route path='/gameInfo' element={<GameInfo/>}/>
         </Routes>
         
       </BrowserRouter >
