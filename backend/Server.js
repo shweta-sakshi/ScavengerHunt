@@ -1,11 +1,12 @@
-const express = require('express')
+const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const userapi = require('./apis/user');
-const gameapi = require('./apis/game')
-require('dotenv').config()
+const gameapi = require('./apis/game');
+const submitapi = require('./apis/submit');
+require('dotenv').config();
 const cors = require("cors");
-const app = express()
+const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
@@ -46,6 +47,7 @@ app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api", (express.json()), userapi);
 app.use("/api", (express.json()), gameapi);
+app.use("/api", (express.json()), submitapi)
 
 
 //connection event accepting request.

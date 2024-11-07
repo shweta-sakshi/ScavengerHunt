@@ -10,7 +10,7 @@ const Gamedetail = new mongoose.Schema({
     },
     Description: {
         type: String,
-        required: true
+        // required: true
     },
     Admin: { type: mongoose.Schema.Types.ObjectId, ref: 'Users' },
     TimeRanges: [{
@@ -31,6 +31,10 @@ const Gamedetail = new mongoose.Schema({
     },
     tasks: [
         {
+            task: {
+                type: String,
+                required: true
+            },
             location: {
                 coordinates: {
                     type: [Number], // [longitude, latitude]
@@ -51,12 +55,9 @@ const Gamedetail = new mongoose.Schema({
                 questionText: {
                     type: String,
                 },
-                answerOptions: [
-                    {
-                        text: { type: String },
-                        isCorrect: { type: Boolean, default: false },
-                    }
-                ]
+                answer: {
+                    type: String
+                }
             }
         }
     ]
