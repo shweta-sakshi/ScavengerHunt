@@ -3,6 +3,7 @@ import Nav from './Nav'
 import Login from './login'
 import Signup from './Signup'
 import Activationpage from './Activationpage'
+import HomePage from './HomePage'
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Signup />} />
           <Route path='/activation/:activation_token' element={<Activationpage />} />
+          <Route path='/homePage' element={<HomePage />} />
         </Routes>
       </BrowserRouter >
     </>

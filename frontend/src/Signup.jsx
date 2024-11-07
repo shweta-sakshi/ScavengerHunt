@@ -69,27 +69,24 @@ const Signup = () => {
 
   return (
     <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+      <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 bg-gray-900">
+        <div className="sm:mx-auto sm:w-full sm:max-w-md shadow-lg bg-gray-800 p-8 rounded-lg hover:shadow-xl transition-shadow duration-200">
           <img
             alt="Your Company"
             src={mnnitimage}
-            className="mx-auto h-10 w-auto"
+            className="mx-auto h-36 w-auto drop-shadow-lg"
           />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          <h2 className="mt-6 text-center text-2xl font-extrabold tracking-wide text-purple-500">
             Sign Up to your account
           </h2>
-        </div>
-
-        <form onSubmit={addUserdata} className="mt-8 space-y-6">
-          <div>
-            <label
-              htmlFor="fname"
-              className="block text-sm font-medium text-gray-300"
-            >
-              Full Name
-            </label>
-            <div className="mt-2">
+          <form onSubmit={addUserdata} className="mt-8 space-y-6">
+            <div>
+              <label
+                htmlFor="fname"
+                className="block text-sm font-medium text-purple-500"
+              >
+                Full Name
+              </label>
               <input
                 type="text"
                 placeholder="Full Name"
@@ -97,18 +94,16 @@ const Signup = () => {
                 value={inpval.fname}
                 name="fname"
                 required
-                className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-600 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 sm:text-sm"
+                className="mt-2 block w-full rounded-md bg-gray-900 py-2 px-3 text-white border border-gray-600 shadow focus:border-purple-500 placeholder-gray-500 focus:ring-2 focus:ring-purple-500"
               />
             </div>
-          </div>
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-300"
-            >
-              Email Address
-            </label>
-            <div className="mt-2">
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-purple-500"
+              >
+                Email Address
+              </label>
               <input
                 type="email"
                 onChange={setVal}
@@ -116,87 +111,86 @@ const Signup = () => {
                 name="email"
                 placeholder="Email Address"
                 required
-                className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-600 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 sm:text-sm"
+                className="mt-2 block w-full rounded-md bg-gray-900 py-2 px-3 text-white border border-gray-600 shadow focus:border-purple-500 placeholder-gray-500 focus:ring-2 focus:ring-purple-500"
               />
             </div>
-          </div>
 
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-300"
-            >
-              Password
-            </label>
-            <div className="mt-2 relative">
-              <input
-                type={!passShow ? "password" : "text"}
-                value={inpval.password}
-                onChange={setVal}
-                name="password"
-                placeholder="Password"
-                required
-                className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-600 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 sm:text-sm"
-              />
-              <button
-                type="button"
-                onClick={() => setPassShow(!passShow)}
-                className="absolute inset-y-0 right-3 flex items-center text-sm text-indigo-500"
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-purple-500"
               >
-                {passShow ? "Hide" : "Show"}
+                Password
+              </label>
+              <div className="relative mt-2">
+                <input
+                  type={!passShow ? "password" : "text"}
+                  value={inpval.password}
+                  onChange={setVal}
+                  name="password"
+                  placeholder="Password"
+                  required
+                  className="block w-full rounded-md bg-gray-900 py-2 px-3 text-white border border-gray-600 shadow focus:border-purple-500 placeholder-gray-500 focus:ring-2 focus:ring-purple-500"
+                />
+                <button
+                  type="button"
+                  onClick={() => setPassShow(!passShow)}
+                  className="absolute inset-y-0 right-3 flex items-center text-sm text-purple-400 hover:text-purple-200"
+                >
+                  {passShow ? "Hide" : "Show"}
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label
+                htmlFor="cpassword"
+                className="block text-sm font-medium text-purple-500"
+              >
+                Confirm Password
+              </label>
+              <div className="relative mt-2">
+                <input
+                  type={!cpassShow ? "password" : "text"}
+                  value={inpval.cpassword}
+                  onChange={setVal}
+                  name="cpassword"
+                  placeholder="Confirm Password"
+                  required
+                  className="block w-full rounded-md bg-gray-900 py-2 px-3 text-white border border-gray-600 shadow focus:border-purple-500 placeholder-gray-500 focus:ring-2 focus:ring-purple-500"
+                />
+                <button
+                  type="button"
+                  onClick={() => setCPassShow(!cpassShow)}
+                  className="absolute inset-y-0 right-3 flex items-center text-sm text-purple-400 hover:text-purple-200"
+                >
+                  {cpassShow ? "Hide" : "Show"}
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-purple-700 px-4 py-2 text-lg font-bold text-white shadow-md hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-200"
+              >
+                Sign Up
               </button>
             </div>
-          </div>
+          </form>
 
-          <div>
-            <label
-              htmlFor="cpassword"
-              className="block text-sm font-medium text-gray-300"
+          <p className="mt-6 text-center text-sm text-purple-400">
+            Already have an account?{" "}
+            <Link
+              to="/login"
+              className="font-semibold text-purple-500 hover:text-purple-400"
             >
-              Confirm Password
-            </label>
-            <div className="mt-2 relative">
-              <input
-                type={!cpassShow ? "password" : "text"}
-                value={inpval.cpassword}
-                onChange={setVal}
-                name="cpassword"
-                placeholder="Confirm Password"
-                required
-                className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-600 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 sm:text-sm"
-              />
-              <button
-                type="button"
-                onClick={() => setCPassShow(!cpassShow)}
-                className="absolute inset-y-0 right-3 flex items-center text-sm text-indigo-500"
-              >
-                {cpassShow ? "Hide" : "Show"}
-              </button>
-            </div>
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-4 py-2 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            >
-              Sign Up
-            </button>
-          </div>
-        </form>
-
-        <p className="mt-6 text-center text-sm text-gray-400">
-          Already have an account?{" "}
-          <Link
-            to="/login"
-            className="font-semibold text-indigo-500 hover:text-indigo-400"
-          >
-            Sign In
-          </Link>
-        </p>
+              Sign In
+            </Link>
+          </p>
+        </div>
       </div>
 
-      {/* React Toastify Container */}
       <ToastContainer
         position="top-center"
         autoClose={5000}
