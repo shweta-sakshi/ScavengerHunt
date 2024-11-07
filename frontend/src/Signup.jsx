@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify';
-import mnnitimage from './assets/mnnit.jpg'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import mnnitimage from "./assets/mnnit.jpg";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -67,134 +67,133 @@ const Signup = () => {
     }
   };
 
-    return (
-        <>
-            <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-                <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                    <img
-                        alt="Your Company"
-                        src={mnnitimage}
-                        className="mx-auto h-10 w-auto"
-                    />
-                    <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                        Sign Up to your account
-                    </h2>
-                </div>
+  return (
+    <>
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <img
+            alt="Your Company"
+            src={mnnitimage}
+            className="mx-auto h-10 w-auto"
+          />
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            Sign Up to your account
+          </h2>
+        </div>
 
-          <form onSubmit={addUserdata} className="mt-8 space-y-6">
-            <div>
-              <label
-                htmlFor="fname"
-                className="block text-sm font-medium text-gray-300"
-              >
-                Full Name
-              </label>
-              <div className="mt-2">
-                <input
-                  type="text"
-                  placeholder="Full Name"
-                  onChange={setVal}
-                  value={inpval.fname}
-                  name="fname"
-                  required
-                  className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-600 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 sm:text-sm"
-                />
-              </div>
+        <form onSubmit={addUserdata} className="mt-8 space-y-6">
+          <div>
+            <label
+              htmlFor="fname"
+              className="block text-sm font-medium text-gray-300"
+            >
+              Full Name
+            </label>
+            <div className="mt-2">
+              <input
+                type="text"
+                placeholder="Full Name"
+                onChange={setVal}
+                value={inpval.fname}
+                name="fname"
+                required
+                className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-600 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 sm:text-sm"
+              />
             </div>
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-300"
-              >
-                Email Address
-              </label>
-              <div className="mt-2">
-                <input
-                  type="email"
-                  onChange={setVal}
-                  value={inpval.email}
-                  name="email"
-                  placeholder="Email Address"
-                  required
-                  className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-600 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 sm:text-sm"
-                />
-              </div>
+          </div>
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-300"
+            >
+              Email Address
+            </label>
+            <div className="mt-2">
+              <input
+                type="email"
+                onChange={setVal}
+                value={inpval.email}
+                name="email"
+                placeholder="Email Address"
+                required
+                className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-600 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 sm:text-sm"
+              />
             </div>
+          </div>
 
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-300"
-              >
-                Password
-              </label>
-              <div className="mt-2 relative">
-                <input
-                  type={!passShow ? "password" : "text"}
-                  value={inpval.password}
-                  onChange={setVal}
-                  name="password"
-                  placeholder="Password"
-                  required
-                  className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-600 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 sm:text-sm"
-                />
-                <button
-                  type="button"
-                  onClick={() => setPassShow(!passShow)}
-                  className="absolute inset-y-0 right-3 flex items-center text-sm text-indigo-500"
-                >
-                  {passShow ? "Hide" : "Show"}
-                </button>
-              </div>
-            </div>
-
-            <div>
-              <label
-                htmlFor="cpassword"
-                className="block text-sm font-medium text-gray-300"
-              >
-                Confirm Password
-              </label>
-              <div className="mt-2 relative">
-                <input
-                  type={!cpassShow ? "password" : "text"}
-                  value={inpval.cpassword}
-                  onChange={setVal}
-                  name="cpassword"
-                  placeholder="Confirm Password"
-                  required
-                  className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-600 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 sm:text-sm"
-                />
-                <button
-                  type="button"
-                  onClick={() => setCPassShow(!cpassShow)}
-                  className="absolute inset-y-0 right-3 flex items-center text-sm text-indigo-500"
-                >
-                  {cpassShow ? "Hide" : "Show"}
-                </button>
-              </div>
-            </div>
-
-            <div>
+          <div>
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-300"
+            >
+              Password
+            </label>
+            <div className="mt-2 relative">
+              <input
+                type={!passShow ? "password" : "text"}
+                value={inpval.password}
+                onChange={setVal}
+                name="password"
+                placeholder="Password"
+                required
+                className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-600 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 sm:text-sm"
+              />
               <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-4 py-2 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                type="button"
+                onClick={() => setPassShow(!passShow)}
+                className="absolute inset-y-0 right-3 flex items-center text-sm text-indigo-500"
               >
-                Sign Up
+                {passShow ? "Hide" : "Show"}
               </button>
             </div>
-          </form>
+          </div>
 
-          <p className="mt-6 text-center text-sm text-gray-400">
-            Already have an account?{" "}
-            <Link
-              to="/login"
-              className="font-semibold text-indigo-500 hover:text-indigo-400"
+          <div>
+            <label
+              htmlFor="cpassword"
+              className="block text-sm font-medium text-gray-300"
             >
-              Sign In
-            </Link>
-          </p>
-        </div>
+              Confirm Password
+            </label>
+            <div className="mt-2 relative">
+              <input
+                type={!cpassShow ? "password" : "text"}
+                value={inpval.cpassword}
+                onChange={setVal}
+                name="cpassword"
+                placeholder="Confirm Password"
+                required
+                className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-600 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 sm:text-sm"
+              />
+              <button
+                type="button"
+                onClick={() => setCPassShow(!cpassShow)}
+                className="absolute inset-y-0 right-3 flex items-center text-sm text-indigo-500"
+              >
+                {cpassShow ? "Hide" : "Show"}
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <button
+              type="submit"
+              className="flex w-full justify-center rounded-md bg-indigo-600 px-4 py-2 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            >
+              Sign Up
+            </button>
+          </div>
+        </form>
+
+        <p className="mt-6 text-center text-sm text-gray-400">
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className="font-semibold text-indigo-500 hover:text-indigo-400"
+          >
+            Sign In
+          </Link>
+        </p>
       </div>
 
       {/* React Toastify Container */}
