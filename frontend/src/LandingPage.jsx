@@ -22,7 +22,7 @@ const LandingPage = () => {
 
         {/* Subtitle */}
         <p className="text-lg md:text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto">
-          Join the ultimate gaming community! Sign up to get started or log in if you’re already a member.
+          Join the ultimate gaming community! Sign up to get started or log in if you’re already a member.~
         </p>
 
         {/* Call-to-Action Buttons */}
