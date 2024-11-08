@@ -8,16 +8,11 @@ import EventPage from './EventPage.jsx'
 import GamePage from './GamePage.jsx'
 import GameInfo from './GameInfo.jsx'
 import QueryPage from './QueryPage.jsx'
-import Gameshow from './Gameshow.jsx'
-
-
 
 function App() {
-
   return (
     <>
       <BrowserRouter>
-
         <Routes>
           <Route path='/' element={<LandingPage />} />
           <Route path='/login' element={<Login />} />
@@ -27,7 +22,6 @@ function App() {
           <Route path='/gamePage' element={<GamePage />} />
           <Route path='/gameInfo' element={<GameInfo />} />
           <Route path='/queryPage' element={<QueryPage />} />
-          <Route path='/gameshow' element={<Gameshow />} />
           <Route path='/activation/:ActivationToken' element={<Activationpage />} />
         </Routes>
 
