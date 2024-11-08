@@ -1,7 +1,6 @@
 const express = require("express");
 const router = new express.Router();
 const Gamedb = require('../models/gamedetail');
-const Userdb = require('../models/userdata')
 const authenticate = require("../middleware/auth");
 
 //create new game.
@@ -38,9 +37,10 @@ router.post('/create-game', authenticate, async (req, res) => {
 //Get all game.
 router.get("/all-games", authenticate, async (req, res) => {
     try {
-        const games = await Gamedb.find().populate("Admin", "userdb"); // Assuming the `Users` model has a `username` field
+        const games = await Gamedb.find().populate("Admin", "userdb");
         res.status(200).json(games);
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: "Failed to retrieve games", error: error.message });
     }
 });
