@@ -9,27 +9,22 @@ import GamePage from './GamePage.jsx'
 import GameInfo from './GameInfo.jsx'
 import QueryPage from './QueryPage.jsx'
 
-
-
 function App() {
-
   return (
     <>
       <BrowserRouter>
-      
         <Routes>
-          <Route path='/' element={<LandingPage/>} />
+          <Route path='/' element={<LandingPage />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Signup />} />
-          <Route path='/activation/:activation_token' element={<Activationpage />} />
           <Route path='/homePage' element={<HomePage />} />
-          <Route path='/eventPage' element={<EventPage/>}/>
-          <Route path='/gamePage' element={<GamePage/>}/>
-          <Route path='/gameInfo' element={<GameInfo/>}/>
-          <Route path='/queryPage'   element={<QueryPage/>}/>
-          <Route path='/activation' element={<Activationpage />} />
+          <Route path='/eventPage' element={<EventPage />} />
+          <Route path='/gamePage' element={<GamePage />} />
+          <Route path='/gameInfo' element={<GameInfo />} />
+          <Route path='/queryPage' element={<QueryPage />} />
+          <Route path='/activation/:ActivationToken' element={<Activationpage />} />
         </Routes>
-        
+
       </BrowserRouter >
     </>
   )

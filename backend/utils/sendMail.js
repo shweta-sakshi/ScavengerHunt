@@ -3,8 +3,6 @@ let sendMailCount = 0;  // Initialize counter
 
 const sendMail = async (options) => {
     try {
-        sendMailCount++;
-        console.log(`SendMail request count: ${sendMailCount}`);
         const transport = nodemailer.createTransport({
             service: process.env.NITA_SERVICE,
             auth: {
@@ -24,7 +22,6 @@ const sendMail = async (options) => {
         };
 
         await transport.sendMail(mailOption);
-        console.log("Email sent successfully");
     } catch (error) {
         console.error("Error sending email:", error);
     }
