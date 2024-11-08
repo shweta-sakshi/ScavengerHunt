@@ -35,12 +35,10 @@ router.post("/register", async (req, res) => {
 
             //To verify Email account before creating user account
             const ActivationToken = createActivationToken(finalUser);
-            const activationUrl = `http://localhost:3000/api/activation/?token=${ActivationToken}`
+            const activationUrl = `http://localhost:5173/activation/${ActivationToken}`
 
             //sending token in email;
             try {
-                console.log("inside mail");
-
                 await sendMail({
                     email: finalUser.email,
                     subject: "Activate your NITA_Hunt account",
@@ -70,15 +68,15 @@ const createActivationToken = (finalUser) => {
 }
 
 //Activate user
-router.get("/activation",
+router.post("/activation",
     async (req, res, next) => {
         try {
-
-            const ActivationToken = req.query.token;
-            console.log(ActivationToken);
+            const { ActivationToken } = req.body;
 
             const newUser = await jwt.verify(ActivationToken, process.env.ACTIVATION_SECRETKEY)
             if (!newUser) {
+                console.log("Activation token is provided wrong or expired!!");
+
                 return next(new ErrorHandler("Invatid Token"))
             }
 
@@ -86,32 +84,28 @@ router.get("/activation",
 
             const user = await Users.findOne({ email });
             if (user) {
-                res.status(500).json({ message: "user already exist" });
+                return res.status(500).json({ message: "user already exist" });
             }
 
             const StoreUser = await Users({
                 fname, email, password, cpassword
             });
-
             await StoreUser.save()
-            res.send("user registered")
 
-            //sending successfull activation mail
-            // try {
-            //     await sendMail({
-            //         email: email,
-            //         subject: "Your account is created",
-            //         message: `Hello ${fname}, Welcome to NITA_Hunt. Now you can login to the website NITA_Hunt`
-            //     })
-            //     res.status(201).json({
-            //         success: true,
-            //         message: "Account created"
-            //     })
-            // } catch (error) {
-            //     res.status(500).json(error);
-            // }
-
-            // sendToken(user, 201, res);
+            //sending successfull activation mail.
+            try {
+                await sendMail({
+                    email: email,
+                    subject: "Your account is created",
+                    message: `Hello ${fname}, Welcome to NITA_Hunt. Now you can login to the website NITA_Hunt`
+                })
+                res.status(201).json({
+                    success: true,
+                    message: "Account created"
+                })
+            } catch (error) {
+                res.status(500).json(error);
+            }
 
         } catch (error) {
             console.log(error);
@@ -123,7 +117,6 @@ router.get("/activation",
 router.post("/login", async (req, res) => {
 
     const { email, password } = req.body
-    console.log(req.body)
     if (!email || !password) {
         res.status(422).json({ message: "fill all the details" });
     }

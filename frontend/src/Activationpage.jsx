@@ -4,31 +4,32 @@ import { useParams } from "react-router";
 import { CheckCircleIcon, ExclamationCircleIcon } from "@heroicons/react/24/solid";
 
 const Activationpage = () => {
-    const { activation_token } = useParams();
+    const { ActivationToken } = useParams();
     const [error, setError] = useState(false);
 
     useEffect(() => {
-        if (activation_token) {
+        // Only activate if the token exists and hasn't been used
+        if (ActivationToken) {
             const activationEmail = async () => {
                 try {
                     const res = await axios.post("/api/activation", {
-                        activation_token,
+                        ActivationToken,
                     });
-                    console.log(res.data.message);
                 } catch (err) {
-                    setError(!error);
+                    setError(true);
+                    console.log(error);
                 }
             };
             activationEmail();
         }
-    }, [activation_token]);
+    }, [ActivationToken]);
 
     return (
         <div className=" max-w-md mx-auto mt-10 px-4 text-2xl flex">
             {error ? (
                 <div className="border-2 border-red-500 flex p-2 text-red-500">
                     <ExclamationCircleIcon className="h-12 w-12  mb-4" />
-                    <p className="pt-2 ">Email not verified. Sign Up again.</p>
+                    <p className="pt-2 ">Activation token Expired</p>
                 </div>
             ) : (
                 <div className="border-2 border-green-500 flex p-2 text-green-500">
