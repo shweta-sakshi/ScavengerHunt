@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 function GamePage() {
   const [gameName, setGameName] = useState("");
@@ -23,8 +23,8 @@ function GamePage() {
   };
 
   return (
-    <div className="max-w-lg mx-auto p-6 bg-gray-800 text-white rounded-lg shadow-lg mt-20">
-      <h1 className="text-2xl font-bold text-center mb-6">
+    <div className="max-w-lg mx-auto p-6 bg-gray-900 text-white rounded-lg shadow-lg mt-20">
+      <h1 className="text-2xl font-bold text-center mb-6 text-yellow-500">
         Welcome to Your Scavenger Hunt Game
       </h1>
 
@@ -41,7 +41,7 @@ function GamePage() {
           value={gameName}
           onChange={(e) => setGameName(e.target.value)}
           placeholder="Enter game name"
-          className="w-full px-4 py-2 bg-gray-700 text-white rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+          className="w-full px-4 py-2 bg-gray-700 text-white rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none"
         />
       </div>
 
@@ -57,7 +57,7 @@ function GamePage() {
           value={gameDescription}
           onChange={(e) => setGameDescription(e.target.value)}
           placeholder="Describe your game"
-          className="w-full px-4 py-2 bg-gray-700 text-white rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none resize-none"
+          className="w-full px-4 py-2 bg-gray-700 text-white rounded-md focus:ring-2 focus:ring-yellow-500 focus:outline-none resize-none"
         />
       </div>
 
@@ -80,7 +80,7 @@ function GamePage() {
             <img
               src={gameImage}
               alt="Game Cover"
-              className="max-w-full h-48 rounded-lg border-2 border-indigo-500 shadow-lg"
+              className="max-w-full h-48 rounded-lg border-2 border-yellow-500 shadow-lg"
             />
           </div>
         )}
@@ -92,7 +92,7 @@ function GamePage() {
         className={`w-full py-2 mt-4 font-semibold rounded-md text-gray-900 
                     ${
                       isFormComplete
-                        ? "bg-indigo-500 hover:bg-indigo-600"
+                        ? "bg-yellow-500 hover:bg-yellow-400"
                         : "bg-gray-600 cursor-not-allowed"
                     }`}
       >
