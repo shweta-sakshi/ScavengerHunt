@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import mnnitlogo from "./assets/mnnitlogo.jpg";
+import mnnitlogo2 from "./assets/mnnitlogo2.jpg";
 
 const LandingPage = () => {
   return (
@@ -18,9 +18,9 @@ const LandingPage = () => {
       >
         <div className="flex items-center">
           <img
-            src={mnnitlogo}
+            src={mnnitlogo2}
             alt="MNNIT GameZone Logo"
-            className="h-12 w-auto rounded-2xl border-2 border-white shadow-md mr-4"
+            className="h-12 w-auto rounded-full  shadow-md mr-4"
           />
           <h1 className="text-2xl font-bold text-white">MNNIT GameZone</h1>
         </div>

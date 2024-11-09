@@ -1,4 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import { FaUserCircle, FaCog, FaSignOutAlt } from "react-icons/fa";
+import mnnitlogo2 from "./assets/mnnitlogo2.jpg";
 
 const activeHunts = [
   {
@@ -26,6 +30,65 @@ const topPlayers = [
 const Home = () => {
   return (
     <div className="bg-gray-900 min-h-screen">
+      {/* Navbar */}
+      <nav className="bg-gradient-to-b from-blue-800 to-blue-600 py-4 px-6 flex justify-between items-center shadow-lg">
+        <div className="flex items-center">
+          <img
+            src={mnnitlogo2}
+            alt="MNNIT GameZone Logo"
+            className="h-10 w-auto rounded-full shadow-md mr-3"
+          />
+          <h1 className="text-xl font-bold text-white">MNNIT GameZone</h1>
+        </div>
+        <div className="flex items-center space-x-4">
+          <Menu as="div" className="relative">
+            <MenuButton className="text-gray-200 hover:text-white font-medium">
+              <div className="flex items-center space-x-2">
+                <FaUserCircle className="h-8 w-8" />
+                <span className="hidden sm:block">Profile</span>
+              </div>
+            </MenuButton>
+            <MenuItems className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+              <MenuItem>
+                {({ active }) => (
+                  <Link
+                    to="/userProfile"
+                    className={`flex items-center px-4 py-2 text-sm text-gray-300 ${
+                      active ? "bg-gray-700 text-white" : ""
+                    }`}
+                  >
+                    <FaUserCircle className="mr-2" /> Profile
+                  </Link>
+                )}
+              </MenuItem>
+              <MenuItem>
+                {({ active }) => (
+                  <Link
+                    to="/setting"
+                    className={`flex items-center px-4 py-2 text-sm text-gray-300 ${
+                      active ? "bg-gray-700 text-white" : ""
+                    }`}
+                  >
+                    <FaCog className="mr-2" /> Settings
+                  </Link>
+                )}
+              </MenuItem>
+              <MenuItem>
+                {({ active }) => (
+                  <Link
+                    to="/"
+                    className={`flex items-center px-4 py-2 text-sm text-gray-300 ${
+                      active ? "bg-gray-700 text-white" : ""
+                    }`}
+                  >
+                    <FaSignOutAlt className="mr-2" /> Sign Out
+                  </Link>
+                )}
+              </MenuItem>
+            </MenuItems>
+          </Menu>
+        </div>
+      </nav>
       {/* Hero Section */}
       <section className="bg-yellow-500 text-gray-900 py-16 px-6 text-center">
         <h1 className="text-4xl font-bold mb-4">Campus Scavenger Hunt</h1>
@@ -76,10 +139,13 @@ const Home = () => {
             </div>
           ))}
         </div>
-        <div className="text-center mt-4">
-          <button className="bg-yellow-500 text-gray-900 px-4 py-2 rounded-lg hover:bg-yellow-400">
+        <div className="text-center mt-4">         
+          <Link
+            to="/leaderboad"
+            className="bg-yellow-500 text-gray-900 px-4 py-2 rounded-lg hover:bg-yellow-400"
+          >
             View Full Leaderboard
-          </button>
+          </Link>
         </div>
       </section>
 

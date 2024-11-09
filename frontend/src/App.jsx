@@ -11,6 +11,9 @@ import QueryPage from './QueryPage.jsx'
 import Leaderboad from './Leaderboad.jsx'
 import GameDiscription from './GameDiscription.jsx'
 import GameDashboard from './GameDashboard.jsx'
+import UserProfile from './UserProfile.jsx'
+import Nav from './Nav.jsx'
+import Setting from './Setting.jsx'
 
 
 function App() {
@@ -19,6 +22,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/nav" element={<Nav />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />
           <Route path="/homePage" element={<HomePage />} />
@@ -29,6 +33,9 @@ function App() {
           <Route path="/leaderboad" element={<Leaderboad />} />
           <Route path="/gameDashboard" element={<GameDashboard />} />
           <Route path="/gameDiscription" element={<GameDiscription />} />
+          <Route path="/userProfile" element={<UserProfile />} />
+          <Route path="/setting" element={<Setting />} />
+
           <Route
             path="/activation/:ActivationToken"
             element={<Activationpage />}

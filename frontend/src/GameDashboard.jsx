@@ -12,9 +12,11 @@ const GameDashboard = () => {
     },
   ];
 
-  const [gameId, setGameId] = useState(""); // State for game ID input
+  const [gameId, setGameId] = useState(""); // State for game ID input (Join a Game)
   const [tasks, setTasks] = useState([]); // State for tasks in Create Game
   const [newTask, setNewTask] = useState(""); // State for new task input
+  const [newGameId, setNewGameId] = useState(""); // State for new game ID in Create Game
+  const [newGameName, setNewGameName] = useState(""); // State for new game name in Create Game
 
   // Function to add a new task
   const addTask = () => {
@@ -28,6 +30,18 @@ const GameDashboard = () => {
   const handleJoinGame = () => {
     alert(`Joining game with ID: ${gameId}`);
     setGameId("");
+  };
+
+  // Function to handle creating a game
+  const handleCreateGame = () => {
+    if (newGameId && newGameName && tasks.length > 0) {
+      alert(`Game "${newGameName}" with ID ${newGameId} created successfully!`);
+      setNewGameId("");
+      setNewGameName("");
+      setTasks([]);
+    } else {
+      alert("Please provide a game name, ID, and at least one task.");
+    }
   };
 
   return (
@@ -76,7 +90,21 @@ const GameDashboard = () => {
         <h2 className="text-xl font-bold mb-4 text-yellow-400">
           Create a Game
         </h2>
-        <div>
+        <div className="space-y-4">
+          <input
+            type="text"
+            placeholder="Game Name"
+            value={newGameName}
+            onChange={(e) => setNewGameName(e.target.value)}
+            className="w-full p-2 rounded-md bg-gray-700 text-gray-200 placeholder-gray-500 focus:outline-none"
+          />
+          <input
+            type="text"
+            placeholder="Game ID"
+            value={newGameId}
+            onChange={(e) => setNewGameId(e.target.value)}
+            className="w-full p-2 rounded-md bg-gray-700 text-gray-200 placeholder-gray-500 focus:outline-none"
+          />
           <h3 className="text-lg font-semibold mb-2 text-white">Tasks</h3>
           <ul className="list-disc list-inside mb-4 text-gray-300">
             {tasks.map((task, index) => (
@@ -98,6 +126,12 @@ const GameDashboard = () => {
               Add Task
             </button>
           </div>
+          <button
+            onClick={handleCreateGame}
+            className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-white w-full mt-4"
+          >
+            Create Game
+          </button>
         </div>
       </div>
     </div>
