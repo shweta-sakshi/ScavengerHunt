@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import mnnitlogo from "./assets/mnnitlogo.jpg";
 
 const LandingPage = () => {
   return (
@@ -17,9 +18,9 @@ const LandingPage = () => {
       >
         <div className="flex items-center">
           <img
-            src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
+            src={mnnitlogo}
             alt="MNNIT GameZone Logo"
-            className="h-10 w-auto mr-4"
+            className="h-12 w-auto rounded-2xl border-2 border-white shadow-md mr-4"
           />
           <h1 className="text-2xl font-bold text-white">MNNIT GameZone</h1>
         </div>

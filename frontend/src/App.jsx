@@ -11,7 +11,7 @@ import QueryPage from './QueryPage.jsx'
 import Leaderboad from './Leaderboad.jsx'
 import GameDiscription from './GameDiscription.jsx'
 import GameDashboard from './GameDashboard.jsx'
-import LandingPage2 from './LandingPage2.jsx'
+
 
 function App() {
   return (
@@ -28,7 +28,6 @@ function App() {
           <Route path="/queryPage" element={<QueryPage />} />
           <Route path="/leaderboad" element={<Leaderboad />} />
           <Route path="/gameDashboard" element={<GameDashboard />} />
-          <Route path="/land" element={<LandingPage2 />} />
           <Route path="/gameDiscription" element={<GameDiscription />} />
           <Route
             path="/activation/:ActivationToken"
