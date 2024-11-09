@@ -6,16 +6,25 @@ const contestants = [
   { rank: 2, name: "Bob", score: 90, time: "13:00" },
   { rank: 3, name: "Charlie", score: 85, time: "13:15" },
   { rank: 4, name: "David", score: 80, time: "13:45" },
+  { rank: 5, name: "Eva", score: 78, time: "14:00" },
+  { rank: 6, name: "Frank", score: 75, time: "14:30" },
+  { rank: 7, name: "Grace", score: 70, time: "15:00" },
+  { rank: 8, name: "Hannah", score: 68, time: "15:30" },
+  { rank: 9, name: "Ivy", score: 65, time: "16:00" },
+  { rank: 10, name: "Jack", score: 60, time: "16:30" },
+  { rank: 11, name: "Liam", score: 58, time: "17:00" },
+  { rank: 12, name: "Mia", score: 55, time: "17:30" },
+  { rank: 13, name: "Noah", score: 50, time: "18:00" },
+  { rank: 14, name: "Olivia", score: 45, time: "18:30" },
+  { rank: 15, name: "Parker", score: 40, time: "19:00" },
+  // Add more contestants as needed
 ];
 
 const Leaderboard = () => {
-  // Filter only top 3 contestants based on rank
-  const topThree = contestants.slice(0, 3);
-
   return (
-    <div className="bg-gray-800 p-6 max-w-md mx-auto rounded-lg shadow-lg mt-20">
+    <div className="bg-gray-800 p-6 max-w-md mx-auto rounded-lg shadow-lg mt-10">
       <h1 className="text-2xl font-bold text-yellow-400 mb-4 text-center">
-        Top 3 Contestants
+         Leaderboard
       </h1>
       <table className="w-full text-white">
         <thead>
@@ -27,7 +36,7 @@ const Leaderboard = () => {
           </tr>
         </thead>
         <tbody>
-          {topThree.map((contestant) => (
+          {contestants.map((contestant) => (
             <tr
               key={contestant.rank}
               className="border-b border-gray-700 hover:bg-gray-700"
