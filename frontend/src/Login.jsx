@@ -39,7 +39,7 @@ const Login = () => {
           { headers: { "Content-Type": "application/json" } }
         );
         localStorage.setItem("usersdatatoken", res.data.result.token);
-        history("/dashboard");
+        history("/homePage");
         setLogindata(true);
         setInpval({ email: "", password: "" });
       } catch (error) {
@@ -126,7 +126,7 @@ const Login = () => {
             <p className="mt-8 text-center text-sm text-purple-400">
               Don't have an account?{" "}
               <Link
-                to="/homePage"
+                to="/register"
                 className="font-semibold text-purple-500 hover:text-purple-400"
               >
                 Sign up
