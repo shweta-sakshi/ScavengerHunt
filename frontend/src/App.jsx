@@ -14,6 +14,7 @@ import GameDashboard from './GameDashboard.jsx'
 import UserProfile from './UserProfile.jsx'
 import Nav from './Nav.jsx'
 import Setting from './Setting.jsx'
+import CongratulationsPage from './CongratulationPage.jsx'
 
 
 function App() {
@@ -35,6 +36,10 @@ function App() {
           <Route path="/gameDiscription" element={<GameDiscription />} />
           <Route path="/userProfile" element={<UserProfile />} />
           <Route path="/setting" element={<Setting />} />
+          <Route
+            path="/congratulationsPage"
+            element={<CongratulationsPage />}
+          />
 
           <Route
             path="/activation/:ActivationToken"
