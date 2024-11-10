@@ -7,7 +7,7 @@ module.exports = (io) => {
     // Create a new game
     router.post('/create-game', authenticate, async (req, res) => {
         try {
-            const { GameTitle, Description, TimeRanges, tasks } = req.body.gameData;
+            const { GameTitle, Description, TimeRanges, tasks } = req.body;
 
             // Ensure tasks align with gameType and type field in task
             validateTasksByGameType(tasks);
