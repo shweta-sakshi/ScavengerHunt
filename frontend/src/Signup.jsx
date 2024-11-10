@@ -72,18 +72,18 @@ const Signup = () => {
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 bg-gray-900">
         <div className="sm:mx-auto sm:w-full sm:max-w-md shadow-lg bg-gray-800 p-8 rounded-lg hover:shadow-xl transition-shadow duration-200">
           <img
-            alt="Your Company"
+            alt="MNNIT Logo"
             src={mnnitimage}
             className="mx-auto h-36 w-auto drop-shadow-lg"
           />
-          <h2 className="mt-6 text-center text-2xl font-extrabold tracking-wide text-purple-500">
+          <h2 className="mt-6 text-center text-2xl font-extrabold tracking-wide text-yellow-500">
             Sign Up to your account
           </h2>
           <form onSubmit={addUserdata} className="mt-8 space-y-6">
             <div>
               <label
                 htmlFor="fname"
-                className="block text-sm font-medium text-purple-500"
+                className="block text-sm font-medium text-yellow-500"
               >
                 Full Name
               </label>
@@ -94,13 +94,13 @@ const Signup = () => {
                 value={inpval.fname}
                 name="fname"
                 required
-                className="mt-2 block w-full rounded-md bg-gray-900 py-2 px-3 text-white border border-gray-600 shadow focus:border-purple-500 placeholder-gray-500 focus:ring-2 focus:ring-purple-500"
+                className="mt-2 block w-full rounded-md bg-gray-900 py-2 px-3 text-white border border-gray-600 shadow focus:border-yellow-500 placeholder-gray-500 focus:ring-2 focus:ring-yellow-500"
               />
             </div>
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-purple-500"
+                className="block text-sm font-medium text-yellow-500"
               >
                 Email Address
               </label>
@@ -111,14 +111,14 @@ const Signup = () => {
                 name="email"
                 placeholder="Email Address"
                 required
-                className="mt-2 block w-full rounded-md bg-gray-900 py-2 px-3 text-white border border-gray-600 shadow focus:border-purple-500 placeholder-gray-500 focus:ring-2 focus:ring-purple-500"
+                className="mt-2 block w-full rounded-md bg-gray-900 py-2 px-3 text-white border border-gray-600 shadow focus:border-yellow-500 placeholder-gray-500 focus:ring-2 focus:ring-yellow-500"
               />
             </div>
 
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-purple-500"
+                className="block text-sm font-medium text-yellow-500"
               >
                 Password
               </label>
@@ -130,12 +130,12 @@ const Signup = () => {
                   name="password"
                   placeholder="Password"
                   required
-                  className="block w-full rounded-md bg-gray-900 py-2 px-3 text-white border border-gray-600 shadow focus:border-purple-500 placeholder-gray-500 focus:ring-2 focus:ring-purple-500"
+                  className="block w-full rounded-md bg-gray-900 py-2 px-3 text-white border border-gray-600 shadow focus:border-yellow-500 placeholder-gray-500 focus:ring-2 focus:ring-yellow-500"
                 />
                 <button
                   type="button"
                   onClick={() => setPassShow(!passShow)}
-                  className="absolute inset-y-0 right-3 flex items-center text-sm text-purple-400 hover:text-purple-200"
+                  className="absolute inset-y-0 right-3 flex items-center text-sm text-yellow-400 hover:text-yellow-300"
                 >
                   {passShow ? "Hide" : "Show"}
                 </button>
@@ -145,7 +145,7 @@ const Signup = () => {
             <div>
               <label
                 htmlFor="cpassword"
-                className="block text-sm font-medium text-purple-500"
+                className="block text-sm font-medium text-yellow-500"
               >
                 Confirm Password
               </label>
@@ -157,12 +157,12 @@ const Signup = () => {
                   name="cpassword"
                   placeholder="Confirm Password"
                   required
-                  className="block w-full rounded-md bg-gray-900 py-2 px-3 text-white border border-gray-600 shadow focus:border-purple-500 placeholder-gray-500 focus:ring-2 focus:ring-purple-500"
+                  className="block w-full rounded-md bg-gray-900 py-2 px-3 text-white border border-gray-600 shadow focus:border-yellow-500 placeholder-gray-500 focus:ring-2 focus:ring-yellow-500"
                 />
                 <button
                   type="button"
                   onClick={() => setCPassShow(!cpassShow)}
-                  className="absolute inset-y-0 right-3 flex items-center text-sm text-purple-400 hover:text-purple-200"
+                  className="absolute inset-y-0 right-3 flex items-center text-sm text-yellow-400 hover:text-yellow-300"
                 >
                   {cpassShow ? "Hide" : "Show"}
                 </button>
@@ -172,18 +172,18 @@ const Signup = () => {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-purple-700 px-4 py-2 text-lg font-bold text-white shadow-md hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-200"
+                className="flex w-full justify-center rounded-md bg-yellow-500 px-4 py-2 text-lg font-bold text-gray-900 shadow-md hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition duration-200"
               >
                 Sign Up
               </button>
             </div>
           </form>
 
-          <p className="mt-6 text-center text-sm text-purple-400">
+          <p className="mt-6 text-center text-sm text-yellow-400">
             Already have an account?{" "}
             <Link
               to="/login"
-              className="font-semibold text-purple-500 hover:text-purple-400"
+              className="font-semibold text-yellow-500 hover:text-yellow-400"
             >
               Sign In
             </Link>
