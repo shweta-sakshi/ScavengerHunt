@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-routing-machine';
 
 function GamePage() {
   const [gameName, setGameName] = useState("");
@@ -7,6 +10,49 @@ function GamePage() {
   const [gameImage, setGameImage] = useState(null);
   const [timeRange, setTimeRange] = useState({ starttime: "", endtime: "" });
   const [tasks, setTasks] = useState([{ type: "location", taskname: "", taskdescription: "", details: {} }]);
+  const mapRef = useRef(null);         // Reference for map container div
+  const mapInstance = useRef(null);    // Reference to store the map instance
+  const markerRef = useRef(null);
+  const [location, setLocation] = useState(null);
+
+  // Define the target location coordinates
+  const targetLocation = { lat: 25.492790797117006, lng: 81.86678711533234 };  // Replace with your specific location
+  const tolerance = 0.005;  // Tolerance range in degrees for user selection
+  let index;
+  const handleindex = (it) => { index = it }
+  useEffect(() => {
+    if (mapInstance.current) return; // If map already initialized, do nothing
+
+    mapInstance.current = L.map(mapRef.current).setView([25.492500268646676, 81.86358907095727], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors',
+    }).addTo(mapInstance.current);
+
+    markerRef.current = L.marker([targetLocation.lat, targetLocation.lng], {
+      title: 'Select this location'
+    }).addTo(mapInstance.current);
+
+    mapInstance.current.on('click', (e) => {
+      console.log(e);
+      const { lat, lng } = e.latlng;
+      handleTaskDetailsChange(index, "coordinates", e.latlng)
+      // Remove the existing marker
+      if (markerRef.current) {
+        mapInstance.current.removeLayer(markerRef.current);
+      }
+
+      // Add a new marker
+      if (Math.abs(lat - targetLocation.lat) <= tolerance && Math.abs(lng - targetLocation.lng) <= tolerance) {
+        markerRef.current = L.marker([lat, lng]).addTo(mapInstance.current);
+        setLocation({ lat, lng }); // Save the lat/lng
+        alert('Location selected successfully!');
+      } else {
+        alert('Please click closer to the designated location.');
+      }
+    });
+  }, [markerRef.current]);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -227,11 +273,11 @@ function GamePage() {
             {/* Task-specific Inputs */}
             {task.type === "location" && (
               <>
-                <input
-                  type="text"
-                  placeholder="Coordinates"
-                  onChange={(e) => handleTaskDetailsChange(index, "coordinates", e.target.value)}
-                  className="w-full mt-2 px-4 py-2 bg-gray-700 text-white rounded-md"
+                <div
+                  ref={mapRef}     // Use the ref to bind Leaflet to the div
+                  id="map"
+                  onChange={handleindex(index)}
+                  className="h-64 w-full mt-6 border border-gray-300 rounded-md"
                 />
                 <input
                   type="number"

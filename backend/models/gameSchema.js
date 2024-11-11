@@ -11,6 +11,11 @@ const Gamedetail = new Schema({
         required: true,
         trim: true
     },
+    profileImageUrl: {
+        type: String,
+        require: true,
+        default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT33wdylFfzr7kybpz6LMTJugCOhNBwKqjsBw&s"
+    },
     Description: {
         type: String
     },

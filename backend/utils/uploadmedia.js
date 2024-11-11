@@ -3,20 +3,19 @@
 // if they are PNG or JPG images.Other file types are 
 // simply stored by filename without being placed in GridFS.
 
-import multer from 'multer';
-import { GridFsStorage } from 'multer-gridfs-storage';
+const multer = require('multer');
+const { GridFsStorage } = require('multer-gridfs-storage');
 
-import dotenv from 'dotenv';
-dotenv.config();
+require('dotenv').config();
 
 
 const storage = new GridFsStorage({
     url: process.env.DB,
     options: { useNewUrlParser: true, useUnifiedTopology: true },
     file: (request, file) => {
-        const match = ["image/png", "image/jpg"];
+        const match = ["image/png", "image/jpg", "image/jpeg"];
 
-        if (match.indexOf(file.memeType) === -1)
+        if (match.indexOf(file.mimetype) === -1)
             return `${Date.now()}-blog-${file.originalname}`;
 
         return {
@@ -26,4 +25,7 @@ const storage = new GridFsStorage({
     }
 });
 
-export default multer({ storage }); 
+module.exports = multer({
+    storage,
+    limits: { fileSize: 5 * 1024 * 1024 }  // 5MB limit
+});

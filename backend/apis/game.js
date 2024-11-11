@@ -2,13 +2,14 @@ const express = require("express");
 const router = new express.Router();
 const Gamedb = require('../models/gameSchema');
 const authenticate = require("../middleware/auth");
+const upload = require('../utils/uploadmedia')
 
 module.exports = (io) => {
     // Create a new game
     router.post('/create-game', authenticate, async (req, res) => {
         try {
             const { GameTitle, Description, TimeRanges, tasks } = req.body;
-
+            
             // Ensure tasks align with gameType and type field in task
             validateTasksByGameType(tasks);
 
