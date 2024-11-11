@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const GameDashboard = () => {
-  // Sample data for joined games
   const joinedGames = [
     { id: 1, name: "Mystic Quest", deadline: "2024-11-15", status: "Playing" },
     {
@@ -13,36 +12,11 @@ const GameDashboard = () => {
     },
   ];
 
-  const [gameId, setGameId] = useState(""); // State for game ID input (Join a Game)
-  const [tasks, setTasks] = useState([]); // State for tasks in Create Game
-  const [newTask, setNewTask] = useState(""); // State for new task input
-  const [newGameId, setNewGameId] = useState(""); // State for new game ID in Create Game
-  const [newGameName, setNewGameName] = useState(""); // State for new game name in Create Game
+  const [gameId, setGameId] = useState("");
 
-  // Function to add a new task
-  const addTask = () => {
-    if (newTask.trim()) {
-      setTasks([...tasks, newTask]);
-      setNewTask("");
-    }
-  };
-
-  // Function to handle joining a game
   const handleJoinGame = () => {
     alert(`Joining game with ID: ${gameId}`);
     setGameId("");
-  };
-
-  // Function to handle creating a game
-  const handleCreateGame = () => {
-    if (newGameId && newGameName && tasks.length > 0) {
-      alert(`Game "${newGameName}" with ID ${newGameId} created successfully!`);
-      setNewGameId("");
-      setNewGameName("");
-      setTasks([]);
-    } else {
-      alert("Please provide a game name, ID, and at least one task.");
-    }
   };
 
   return (
@@ -88,10 +62,16 @@ const GameDashboard = () => {
 
       {/* Create a Game Section */}
       <div className="flex justify-center items-center">
-        <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+        <div className="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+          <h2 className="text-xl font-bold text-yellow-400 mb-4">
+            Want to Start a New Game?
+          </h2>
+          <p className="text-gray-400 mb-6">
+            Click below to create a customized game for you and your friends!
+          </p>
           <Link
-            to='/gamePage'
-            className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-white w-full mt-4 text-center"
+            to="/gamePage"
+            className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-md text-white font-semibold transition-colors"
           >
             Create Game
           </Link>

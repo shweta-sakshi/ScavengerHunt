@@ -77,7 +77,7 @@ const LandingPage = () => {
             “MNNIT GameZone connects us in a whole new way! The tasks make me
             feel closer to my college community and campus.”
           </blockquote>
-          <p className="text-right">- Shivangi Verma, Computer Science</p>
+          <p className="text-right">- Miss xyz, Computer Science</p>
         </div>
 
         {/* Newsletter Signup */}
