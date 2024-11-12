@@ -9,7 +9,7 @@ module.exports = (io) => {
     router.post('/create-game', authenticate, async (req, res) => {
         try {
             const { GameTitle, Description, TimeRanges, tasks } = req.body;
-            
+
             // Ensure tasks align with gameType and type field in task
             validateTasksByGameType(tasks);
 
@@ -37,7 +37,18 @@ module.exports = (io) => {
     // Get all games
     router.get('/all-games', authenticate, async (req, res) => {
         try {
-            const games = await Gamedb.find().populate('Admin', 'username email');
+            const games = await Gamedb.find({ Admin: { $ne: req.userId } }).populate('Admin', 'username email');
+            res.status(200).json(games);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Failed to retrieve games", error: error.message });
+        }
+    });
+
+    //Game for user who has created it.
+    router.get('/admin-game', authenticate, async (req, res) => {
+        try {
+            const games = await Gamedb.find({ Admin: req.userId }).populate('Admin', 'username email');
             res.status(200).json(games);
         } catch (error) {
             console.error(error);

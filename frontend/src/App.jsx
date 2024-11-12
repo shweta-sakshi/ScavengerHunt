@@ -12,6 +12,7 @@ import Leaderboad from './Leaderboad.jsx'
 import GameDiscription from './GameDiscription.jsx'
 import GameDashboard from './GameDashboard.jsx'
 import UserProfile from './UserProfile.jsx'
+import MyGames from './MyGames.jsx'
 import Nav from './Nav.jsx'
 import Setting from './Setting.jsx'
 import CongratulationsPage from './CongratulationPage.jsx'
@@ -29,6 +30,7 @@ function App() {
           <Route path="/homePage" element={<HomePage />} />
           <Route path="/eventPage" element={<EventPage />} />
           <Route path="/gamePage" element={<GamePage />} />
+          <Route path="/mygames" element={<MyGames />} />
           <Route path="/gameInfo" element={<GameInfo />} />
           <Route path="/queryPage" element={<QueryPage />} />
           <Route path="/leaderboad" element={<Leaderboad />} />

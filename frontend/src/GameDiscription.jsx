@@ -10,7 +10,7 @@ const GameDescription = () => {
   const { id } = useParams();
   const [selectedTaskIndex, setSelectedTaskIndex] = useState(null);
   const [showDialog, setShowDialog] = useState(false);
-  const [taskAnswer, setTaskAnswer] = useState("");
+  const [taskAnswer, setTaskAnswer] = useState();
   //Variable for map.
   const mapRef = useRef(null);         // Reference for map container div
   const mapInstance = useRef(null);    // Reference to store the map instance
@@ -55,7 +55,7 @@ const GameDescription = () => {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     if (!navigator.geolocation) {
       setError('Geolocation is not supported by this browser.');
       return;
@@ -138,15 +138,16 @@ const GameDescription = () => {
     switch (task.type) {
       case "location":
         if (location) {
-          alert(`Selected location: ${JSON.stringify(location)}`);
+          setTaskAnswer(location)
+          alert(`Your location: ${JSON.stringify(location)}`);
         } else {
-          alert("Please select a location on the map.");
+          alert("Please reach to a destination.");
         }
         break;
 
       case "image":
         if (taskAnswer.trim()) {
-          alert(`Image URL submitted: ${taskAnswer}`);
+          alert(`Image submitted `);
         } else {
           alert("Please provide an image URL.");
         }
@@ -163,6 +164,28 @@ const GameDescription = () => {
       default:
         alert("Unknown task type.");
     }
+
+    const submission = {
+      gameId: id,
+      taskId: task._id,
+      solution: taskAnswer
+    }
+
+    console.log(submission);
+
+
+    axios.post('/api/submit-answer', submission, {
+      headers: {
+        "Content-Type": "application/json",
+        authorization: localStorage.getItem("usersdatatoken")
+      }
+    }).
+      then((res) => {
+        console.log(res);
+      }).
+      catch((error) => {
+        console.log(error);
+      })
 
     closeDialog();
   };

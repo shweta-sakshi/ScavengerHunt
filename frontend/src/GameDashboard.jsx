@@ -39,10 +39,6 @@ const GameDashboard = () => {
     }
   };
 
-  const openGame = (id) => {
-
-  }
-
   const { games, data } = useGamelistdata();
   console.log(games);
 
@@ -112,27 +108,95 @@ const GameDashboard = () => {
             </button>
           </div>
         </div>
-
-        {/* Create a Game Section */}
+        {/* This for game my game and create game button */}
         <div className="flex justify-center items-center">
-          <div className="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
-            <h2 className="text-xl font-bold text-yellow-400 mb-4">
-              Want to Start a New Game?
-            </h2>
-            <p className="text-gray-400 mb-6">
-              Click below to create a customized game for you and your friends!
-            </p>
-            <Link
-              to="/gamePage"
-              className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-md text-white font-semibold transition-colors"
-            >
-              Create Game
-            </Link>
+          {/* Wrapper div to align child divs side by side */}
+          <div className="flex justify-between gap-6">
+            {/* Create Games */}
+            <div className="flex justify-center items-center">
+              <div className="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+                <h2 className="text-xl font-bold text-yellow-400 mb-4">
+                  Want to Start a New Game?
+                </h2>
+                <p className="text-gray-400 mb-6">
+                  Click below to create a customized game for you and your friends!
+                </p>
+                <Link
+                  to="/gamePage"
+                  className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-md text-white font-semibold transition-colors"
+                >
+                  Create Game
+                </Link>
+              </div>
+            </div>
+
+            {/* My Game functionality. */}
+            <div className="flex justify-center items-center">
+              <div className="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+                <h2 className="text-xl font-bold text-yellow-400 mb-4">
+                  Make the change in your game Collection ?
+                </h2>
+                <p className="text-gray-400 mb-6">
+                  want to see the collection of enjoyment you have created for others.
+                </p>
+                <Link
+                  to="/mygames"
+                  className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-md text-white font-semibold transition-colors"
+                >
+                  MY Games
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     ) : (
-      <div>No Game to play</div>
+      <div className="bg-gray-900 min-h-screen text-white p-8 space-y-8">
+        <div className="bg-gray-800 p-5 rounded-lg shadow-lg">
+          <h2 className="text-xl font-bold mb-4 text-yellow-400">No Game to play.</h2>
+        </div>
+        {/* This for game my game and create game button */}
+        <div className="flex justify-center items-center">
+          {/* Wrapper div to align child divs side by side */}
+          <div className="flex justify-between gap-6">
+            {/* Create Games */}
+            <div className="flex justify-center items-center">
+              <div className="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+                <h2 className="text-xl font-bold text-yellow-400 mb-4">
+                  Want to Start a New Game?
+                </h2>
+                <p className="text-gray-400 mb-6">
+                  Click below to create a customized game for you and your friends!
+                </p>
+                <Link
+                  to="/gamePage"
+                  className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-md text-white font-semibold transition-colors"
+                >
+                  Create Game
+                </Link>
+              </div>
+            </div>
+
+            {/* My Game functionality. */}
+            <div className="flex justify-center items-center">
+              <div className="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
+                <h2 className="text-xl font-bold text-yellow-400 mb-4">
+                  Make the change in your game Collection ?
+                </h2>
+                <p className="text-gray-400 mb-6">
+                  want to see the collection of enjoyment you have created for others.
+                </p>
+                <Link
+                  to="/mygames"
+                  className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-md text-white font-semibold transition-colors"
+                >
+                  MY Games
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     )
   );
 };
