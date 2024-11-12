@@ -17,6 +17,8 @@ const GameDescription = () => {
   const markerRef = useRef(null);
   const [error, setError] = useState(null);
   const [location, setLocation] = useState({ lat: null, lng: null });
+  const routeControlRef = useRef(null); // Reference for route control
+  const destinationMarkerRef = useRef(null); // Reference for destination marker
 
   useEffect(() => {
     axios
@@ -43,9 +45,17 @@ const GameDescription = () => {
   const closeDialog = () => {
     setShowDialog(false);
     setSelectedTaskIndex(null);
+    if (routeControlRef.current) {
+      mapInstance.current.removeControl(routeControlRef.current);
+      routeControlRef.current = null;
+    }
+    if (destinationMarkerRef.current) {
+      mapInstance.current.removeLayer(destinationMarkerRef.current);
+      destinationMarkerRef.current = null;
+    }
   };
 
-  useEffect(() => {
+  useEffect(()=>{
     if (!navigator.geolocation) {
       setError('Geolocation is not supported by this browser.');
       return;
@@ -65,7 +75,7 @@ const GameDescription = () => {
     return () => {
       navigator.geolocation.clearWatch(watcher); // Clean up watcher on component unmount
     };
-  }, []);
+  }, [])
 
   useEffect(() => {
     // Ensure mapRef is available before initializing the map
@@ -85,6 +95,42 @@ const GameDescription = () => {
     }
   }, [location]);  // Run when location changes
 
+  //Function to Show route.
+  const showRoute = (destination) => {
+    if (routeControlRef.current) {
+      mapInstance.current.removeControl(routeControlRef.current);
+    }
+
+    routeControlRef.current = L.Routing.control({
+      waypoints: [
+        L.latLng(location.lat, location.lng),
+        L.latLng(destination.lat, destination.lng),
+      ],
+      routeWhileDragging: true,
+    }).addTo(mapInstance.current);
+  };
+
+  useEffect(() => {
+    if (showDialog && game.tasks[selectedTaskIndex]?.type === "location") {
+      const task = game.tasks[selectedTaskIndex];
+      const destination = task.destination; // Ensure your task has a `destination` property { lat, lng }
+
+      if (destination) {
+        if (destinationMarkerRef.current) {
+          mapInstance.current.removeLayer(destinationMarkerRef.current);
+        }
+
+        destinationMarkerRef.current = L.marker([destination.lat, destination.lng], {
+          title: "Task Destination",
+          icon: L.icon({
+            iconUrl: "https://cdn-icons-png.flaticon.com/512/149/149059.png",
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+          }),
+        }).addTo(mapInstance.current);
+      }
+    }
+  }, [showDialog, selectedTaskIndex, game]);
 
   const handleSubmitAnswer = () => {
     const task = game.tasks[selectedTaskIndex];
@@ -134,7 +180,7 @@ const GameDescription = () => {
 
           {game.tasks.map((task, index) => (
             <div key={index} className="mt-6">
-              <h3 className="text-xl text-yellow-500">{task.taskname}</h3>
+              <h3 className="text-xl text-yellow-500">{index + 1}. {task.taskname}</h3>
               <p>{task.taskdescription}</p>
               <button
                 className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
@@ -154,12 +200,13 @@ const GameDescription = () => {
 
             {game.tasks[selectedTaskIndex]?.type === "location" && (
               <div>
-                <p className="text-sm text-gray-400 mb-2">You Are Here!!!</p>
-                <div
-                  ref={mapRef}     // Use the ref to bind Leaflet to the div
-                  id="map"
-                  className="h-64 w-full mt-6 border border-gray-300 rounded-md"
-                />
+                <div ref={mapRef} id="map" className="h-64 w-full mt-6 border border-gray-300 rounded-md" />
+                <button
+                  className="mt-4 px-4 py-2 bg-green-500 text-white rounded"
+                  onClick={() => showRoute(game.tasks[selectedTaskIndex].location.coordinates)}
+                >
+                  Show Route
+                </button>
               </div>
             )}
 
