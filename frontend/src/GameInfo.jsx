@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useParams } from "react-router-dom";
 
 const gameTitle = "Adventure Quest";
 const gameDescription =
@@ -8,6 +9,7 @@ const gameDescription =
 const gameTimes = ["10:00 AM", "5:00 PM"];
 
 const GameInfo = () => {
+  const {gid} = useParams()
   const [tasks, setTasks] = useState([]);
 
   const addTask = () => {

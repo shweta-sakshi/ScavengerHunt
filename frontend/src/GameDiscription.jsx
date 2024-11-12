@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine';
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import NavGame from "./NavGame";
 
 const GameDescription = () => {
   const [game, setGame] = useState(null);
@@ -16,6 +17,7 @@ const GameDescription = () => {
   const mapInstance = useRef(null);    // Reference to store the map instance
   const markerRef = useRef(null);
   const [error, setError] = useState(null);
+  const [exist, setexist] = useState(false);
   const [location, setLocation] = useState({ lat: null, lng: null });
   const routeControlRef = useRef(null); // Reference for route control
   const destinationMarkerRef = useRef(null); // Reference for destination marker
@@ -29,12 +31,14 @@ const GameDescription = () => {
         },
       })
       .then((res) => {
+        setexist(true);
         setGame(res.data);
       })
       .catch((err) => {
+        setexist(false)
         console.error("Failed to fetch game data:", err);
       });
-  }, [id]);
+  }, [id, exist]);
 
   const openDialog = (index) => {
     setSelectedTaskIndex(index);
@@ -192,27 +196,54 @@ const GameDescription = () => {
 
   if (!game) return <p>Loading game data...</p>;
 
-  return (
-    <div className="bg-gray-900 h-screen text-white flex flex-col p-4">
-      <div className="flex-1 flex flex-col items-center">
-        <div className="p-6 bg-gray-800 rounded-lg shadow-lg w-full max-w-3xl">
-          <h1 className="text-2xl font-bold text-yellow-500 text-center">
-            {game.GameTitle}
-          </h1>
-          <p className="mt-4">{game.Description}</p>
+  return exist ? (
+    <>
+      <NavGame />
+      <div className="bg-gray-900 h-screen text-white flex flex-col p-4">
+        <div className="flex-1 flex flex-col items-center">
+          {/* Show Game Detail */}
+          <div className="p-6 bg-gray-800 rounded-lg shadow-lg w-full max-w-3xl">
+            <h1 className="text-2xl font-bold text-yellow-500 text-center">
+              {game.GameTitle}
+            </h1>
+            <p className="mt-4">{game.Description}</p>
 
-          {game.tasks.map((task, index) => (
-            <div key={index} className="mt-6">
-              <h3 className="text-xl text-yellow-500">{index + 1}. {task.taskname}</h3>
-              <p>{task.taskdescription}</p>
-              <button
-                className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
-                onClick={() => openDialog(index)}
-              >
-                Submit Answer
-              </button>
-            </div>
-          ))}
+            {game.tasks.map((task, index) => (
+              <div key={index} className="mt-6">
+                <h3 className="text-xl text-yellow-500">{index + 1}. {task.taskname}</h3>
+                <p>{task.taskdescription}</p>
+                <button
+                  className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
+                  onClick={() => openDialog(index)}
+                >
+                  Submit Answer
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Show Submitted answers */}
+        <div className="flex-1 flex flex-col items-center">
+          <div className="p-6 bg-gray-800 rounded-lg shadow-lg w-full max-w-3xl">
+            <h1 className="text-2xl font-bold text-yellow-500 text-center">
+              Submitted answers
+            </h1>
+            {/* <p className="mt-4">{game.Description}</p>
+
+            {game.tasks.map((task, index) => (
+              <div key={index} className="mt-6">
+                <h3 className="text-xl text-yellow-500">{index + 1}. {task.taskname}</h3>
+                <p>{task.taskdescription}</p>
+                <button
+                  className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
+                  onClick={() => openDialog(index)}
+                >
+                  Submit Answer
+                </button>
+              </div>
+            ))} */}
+          </div>
         </div>
       </div>
 
@@ -270,8 +301,19 @@ const GameDescription = () => {
           </div>
         </div>
       )}
-    </div>
-  );
+    </>
+  ) : (
+    <>
+      <NavGame />
+      <div className="bg-gray-900 h-screen text-white flex flex-col p-4">
+        <div className="flex-1 flex flex-col items-center">
+          <h1 className="text-2xl font-bold text-yellow-500 text-center">
+            {game.GameTitle} Doesn't exist any more.
+          </h1>
+        </div>
+      </div>
+    </>
+  )
 };
 
 export default GameDescription;

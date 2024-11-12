@@ -24,14 +24,13 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/nav" element={<Nav />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />
           <Route path="/homePage" element={<HomePage />} />
           <Route path="/eventPage" element={<EventPage />} />
           <Route path="/gamePage" element={<GamePage />} />
           <Route path="/mygames" element={<MyGames />} />
-          <Route path="/gameInfo" element={<GameInfo />} />
+          <Route path="/updategameInfo/:gid" element={<GameInfo />} />
           <Route path="/queryPage" element={<QueryPage />} />
           <Route path="/leaderboad" element={<Leaderboad />} />
           <Route path="/gameDashboard" element={<GameDashboard />} />

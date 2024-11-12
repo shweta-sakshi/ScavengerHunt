@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import NavGame from "./NavGame";
 
 const MyGames = () => {
     //for time calculation:
@@ -81,85 +82,84 @@ const MyGames = () => {
 
     return (
         data ? (
-            <div className="bg-gray-900 min-h-screen text-white p-8 space-y-8">
-                {/* Joined Games Section */}
-                <div className="bg-gray-800 p-5 rounded-lg shadow-lg">
-                    <h2 className="text-xl font-bold mb-4 text-yellow-400">MY GAMES</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                        {games.map((game) => {
-                            const { label, days, hours, minutes, seconds } = calculateDuration(
-                                game.TimeRanges
-                            )
-                            return (
-                                <div
-                                    key={game._id}
-                                    className="bg-gray-700 rounded-lg overflow-hidden shadow-lg flex flex-col"
-                                >
-                                    {/* Game Image */}
-                                    <img
-                                        src={game.profileImageUrl}
-                                        alt="image"
-                                        className="h-48 w-full object-cover"
-                                    />
-                                    {/* Game Details */}
-                                    <div className="p-4 flex-1 flex flex-col justify-between">
-                                        <div>
-                                            <h3 className="text-lg font-semibold text-white">{game.GameTitle}</h3>
-                                            <p className="text-sm text-gray-400">{label}: {days}d {hours}h {minutes}m {seconds}s</p>
+            <>
+                <NavGame />
+                <div className="bg-gray-900 min-h-screen text-white p-10 space-y-10 flex flex-col items-center">
+                    {/* Joined Games Section */}
+                    <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-screen-lg">
+                        <h2 className="text-3xl font-extrabold mb-6 text-yellow-400 text-center tracking-wider">
+                            Games To Play
+                        </h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center">
+                            {games.map((game) => {
+                                const { label, days, hours, minutes, seconds, duration } =
+                                    calculateDuration(game.TimeRanges);
+                                return (
+                                    <div
+                                        key={game._id}
+                                        className="bg-gray-700  rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl w-80"
+                                    >
+                                        {/* Game Image */}
+                                        <div className=" m-2">
+                                            <Link to={`/gameDiscription/${game._id}`}>
+                                                <img
+                                                    src={game.profileImageUrl}
+                                                    alt="game image"
+                                                    className="h-48 w-full object-cover"
+                                                />
+                                            </Link>
+                                            {/* Game Details */}
+                                            <div className="p-6 flex-1 flex flex-col justify-between">
+                                                <div>
+                                                    <h3 className="text-xl font-semibold text-white mb-2">
+                                                        {game.GameTitle}
+                                                    </h3>
+                                                    <p className="text-gray-400 mb-2">{game.Description}</p>
+                                                    <p className="text-sm text-gray-300 font-light">
+                                                        {label}:{" "}
+                                                        <span className="font-medium text-yellow-300">
+                                                            {days}d {hours}h {minutes}m {seconds}s
+                                                        </span>
+                                                    </p>
+                                                    <p className="text-sm text-gray-400 mt-1">
+                                                        Duration: {duration}
+                                                    </p>
+                                                </div>
+                                                <Link
+                                                    to={`/gameDiscription/${game._id}`}
+                                                    onClick={handleDeleteGame}
+                                                    className="bg-red-500 hover:bg-red-600 transition-colors duration-300 px-4 py-2 rounded-md text-white mt-4 font-semibold text-center"
+                                                >
+                                                    Delete
+                                                </Link>
+                                                <Link
+                                                    to={`/updategameInfo/${game._id}`}
+                                                    className="bg-green-500 hover:bg-green-600 transition-colors duration-300 px-4 py-2 rounded-md text-white mt-4 font-semibold text-center"
+                                                >
+                                                    Update
+                                                </Link>
+                                            </div>
                                         </div>
-                                        <button
-                                            onClick={handleDeleteGame}
-                                            className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md text-white mt-4"
-                                        >
-                                            Delete
-                                        </button>
                                     </div>
-                                </div>
-                            )
-                        })}
+                                );
+                            })}
+                        </div>
                     </div>
                 </div>
-                {/* Create Games */}
-                <div className="flex justify-center items-center">
-                    <div className="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
-                        <h2 className="text-xl font-bold text-yellow-400 mb-4">
-                            Want to Start a New Game?
-                        </h2>
-                        <p className="text-gray-400 mb-6">
-                            Click below to create a customized game for you and your friends!
-                        </p>
-                        <Link
-                            to="/gamePage"
-                            className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-md text-white font-semibold transition-colors"
-                        >
-                            Create Game
-                        </Link>
-                    </div>
-                </div>
-            </div>
+            </>
         ) : (
-            <div className="bg-gray-900 min-h-screen text-white p-8 space-y-8">
-                <div className="bg-gray-800 p-5 rounded-lg shadow-lg">
-                    <h2 className="text-xl font-bold mb-4 text-yellow-400">You have not created any game.</h2>
-                </div>
-                {/* Create Games */}
-                <div className="flex justify-center items-center">
-                    <div className="bg-gray-800 p-6 rounded-lg shadow-lg text-center">
-                        <h2 className="text-xl font-bold text-yellow-400 mb-4">
-                            Want to Start a New Game?
-                        </h2>
-                        <p className="text-gray-400 mb-6">
-                            Click below to create a customized game for you and your friends!
-                        </p>
+            <>
+                <NavGame />
+                <div className="bg-gray-900 min-h-screen text-white p-8 space-y-8">
+                    <div className="bg-gray-800 p-5 rounded-lg shadow-lg">
                         <Link
-                            to="/gamePage"
-                            className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-md text-white font-semibold transition-colors"
+                            to='\gamePage'
                         >
-                            Create Game
+                            <h2 className="text-xl font-bold mb-4 text-yellow-400">create game.</h2>
                         </Link>
                     </div>
                 </div>
-            </div>
+            </>
         )
     );
 };

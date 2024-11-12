@@ -37,6 +37,17 @@ module.exports = (io) => {
     // Get all games
     router.get('/all-games', authenticate, async (req, res) => {
         try {
+            const games = await Gamedb.find().populate('Admin', 'username email');
+            res.status(200).json(games);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: "Failed to retrieve games", error: error.message });
+        }
+    });
+
+    //get game for all the users to play.
+    router.get('/play-games', authenticate, async (req, res) => {
+        try {
             const games = await Gamedb.find({ Admin: { $ne: req.userId } }).populate('Admin', 'username email');
             res.status(200).json(games);
         } catch (error) {

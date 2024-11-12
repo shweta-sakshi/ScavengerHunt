@@ -1,4 +1,5 @@
 import React from "react";
+import NavGame from "./NavGame";
 
 // Sample data for contestants
 const contestants = [
@@ -22,36 +23,39 @@ const contestants = [
 
 const Leaderboard = () => {
   return (
-    <div className="min-h-screen bg-gray-800 p-6 flex flex-col items-center justify-center text-white">
-      <h1 className="text-3xl font-bold text-yellow-400 mb-8 text-center">
-        Leaderboard
-      </h1>
-      <div className="overflow-x-auto w-full max-w-5xl">
-        <table className="w-full text-white">
-          <thead>
-            <tr className="bg-gray-700 text-left">
-              <th className="p-3 text-yellow-400">Rank</th>
-              <th className="p-3 text-yellow-400">Name</th>
-              <th className="p-3 text-yellow-400">Score</th>
-              <th className="p-3 text-yellow-400">Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            {contestants.map((contestant) => (
-              <tr
-                key={contestant.rank}
-                className="border-b border-gray-700 hover:bg-gray-700"
-              >
-                <td className="p-3">{contestant.rank}</td>
-                <td className="p-3">{contestant.name}</td>
-                <td className="p-3">{contestant.score}</td>
-                <td className="p-3">{contestant.time}</td>
+    <>
+      <NavGame />
+      <div className="min-h-screen bg-gray-800 p-6 flex flex-col items-center justify-center text-white">
+        <h1 className="text-3xl font-bold text-yellow-400 mb-8 text-center">
+          Leaderboard
+        </h1>
+        <div className="overflow-x-auto w-full max-w-5xl">
+          <table className="w-full text-white">
+            <thead>
+              <tr className="bg-gray-700 text-left">
+                <th className="p-3 text-yellow-400">Rank</th>
+                <th className="p-3 text-yellow-400">Name</th>
+                <th className="p-3 text-yellow-400">Score</th>
+                <th className="p-3 text-yellow-400">Time</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {contestants.map((contestant) => (
+                <tr
+                  key={contestant.rank}
+                  className="border-b border-gray-700 hover:bg-gray-700"
+                >
+                  <td className="p-3">{contestant.rank}</td>
+                  <td className="p-3">{contestant.name}</td>
+                  <td className="p-3">{contestant.score}</td>
+                  <td className="p-3">{contestant.time}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
