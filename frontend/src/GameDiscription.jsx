@@ -5,6 +5,7 @@ import 'leaflet-routing-machine';
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import NavGame from "./NavGame";
+import CongratulationPage from './CongratulationPage'
 
 const GameDescription = () => {
   const [game, setGame] = useState(null);
@@ -21,6 +22,7 @@ const GameDescription = () => {
   const [location, setLocation] = useState({ lat: null, lng: null });
   const routeControlRef = useRef(null); // Reference for route control
   const destinationMarkerRef = useRef(null); // Reference for destination marker
+  const [isComplete, setisComplete] = useState(false)
 
   useEffect(() => {
     axios
@@ -223,8 +225,17 @@ const GameDescription = () => {
           </div>
         </div>
 
+        {/* Congratulaion Page*/}
+        {isComplete ? (
+          <div className="mt-6 flex-1 flex flex-col items-center">
+            <div className="p-6 bg-gray-800 rounded-lg shadow-lg w-full max-w-3xl">
+              <CongratulationPage />
+            </div>
+          </div>
+        ) : (<></>)}
+
         {/* Show Submitted answers */}
-        <div className="flex-1 flex flex-col items-center">
+        <div className=" mt-6 flex-1 flex flex-col items-center">
           <div className="p-6 bg-gray-800 rounded-lg shadow-lg w-full max-w-3xl">
             <h1 className="text-2xl font-bold text-yellow-500 text-center">
               Submitted answers

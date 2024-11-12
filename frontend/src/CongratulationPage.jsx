@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 
 const CongratulationsPage = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-yellow-400 p-4">
+    <div className="mt-4 flex flex-col items-center justify-center bg-gray-800 text-yellow-400 p-4">
       <div className="text-center">
-        <div className="animate-bounce mb-6">
-          <FaTrophy className="text-yellow-500 text-6xl mx-auto" />
+        <div className="animate-bounce mb-4">
+          <FaTrophy className="text-yellow-500 text-4xl mx-auto" />
         </div>
         <h1 className="text-4xl font-bold mb-4">Congratulations!</h1>
         <p className="text-lg text-gray-300 mb-8">
-          You have successfully completed the task. Great job!
+          You have successfully completed all the task. Great job!
         </p>
       </div>
 
@@ -28,10 +28,10 @@ const CongratulationsPage = () => {
 
       {/* Button to Go Back to Home or Main Page */}
       <Link
-        to="/homePage"
+        to="/gameDashboard"
         className="bg-yellow-500 text-gray-900 px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-yellow-600 transition-all"
       >
-        Back to Home
+        Back to Dashboard
       </Link>
     </div>
   );
