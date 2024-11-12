@@ -33,14 +33,13 @@ function App() {
           <Route path="/queryPage" element={<QueryPage />} />
           <Route path="/leaderboad" element={<Leaderboad />} />
           <Route path="/gameDashboard" element={<GameDashboard />} />
-          <Route path="/gameDiscription" element={<GameDiscription />} />
+          <Route path="/gameDiscription/:id" element={<GameDiscription />} />
           <Route path="/userProfile" element={<UserProfile />} />
           <Route path="/setting" element={<Setting />} />
           <Route
             path="/congratulationsPage"
             element={<CongratulationsPage />}
           />
-
           <Route
             path="/activation/:ActivationToken"
             element={<Activationpage />}
