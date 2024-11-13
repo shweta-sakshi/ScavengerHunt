@@ -117,6 +117,7 @@ router.post("/activation",
 router.post("/login", async (req, res) => {
 
     const { email, password } = req.body
+
     if (!email || !password) {
         res.status(422).json({ message: "fill all the details" });
     }
