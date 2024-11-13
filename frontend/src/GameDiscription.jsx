@@ -22,7 +22,7 @@ const GameDescription = () => {
   const [location, setLocation] = useState({ lat: null, lng: null });
   const routeControlRef = useRef(null); // Reference for route control
   const destinationMarkerRef = useRef(null); // Reference for destination marker
-  const [isComplete, setisComplete] = useState(true)
+  const [isComplete, setisComplete] = useState(false)
 
   useEffect(() => {
     axios

@@ -125,13 +125,12 @@ const MyGames = () => {
                                                         Duration: {duration}
                                                     </p>
                                                 </div>
-                                                <Link
-                                                    to={`/gameDiscription/${game._id}`}
+                                                <button
                                                     onClick={handleDeleteGame}
                                                     className="bg-red-500 hover:bg-red-600 transition-colors duration-300 px-4 py-2 rounded-md text-white mt-4 font-semibold text-center"
                                                 >
                                                     Delete
-                                                </Link>
+                                                </button>
                                                 <Link
                                                     to={`/updategameInfo/${game._id}`}
                                                     className="bg-green-500 hover:bg-green-600 transition-colors duration-300 px-4 py-2 rounded-md text-white mt-4 font-semibold text-center"

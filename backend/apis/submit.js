@@ -33,4 +33,12 @@ router.post('/submit-answer', authenticate, async (req, res) => {
     }
 });
 
+// router.get('/submitted-answer', authenticate, async(req, res)=>{
+//     try {
+//         const submission = await solutiondb.findOne({ gameId: gameId, userId: req.userId, taskId: taskId });
+//     } catch (error) {
+
+//     }
+// })
+
 module.exports = router;

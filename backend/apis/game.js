@@ -116,9 +116,11 @@ module.exports = (io) => {
     });
 
     // Delete game
-    router.delete('/delete-games/:id', authenticate, async (req, res) => {
+    router.delete('/delete-games/:gameId', authenticate, async (req, res) => {
         try {
-            const deletedGame = await Gamedb.findByIdAndDelete(req.params.id);
+            console.log(req.params.gameId);
+            const { gameId } = req.params
+            const deletedGame = await Gamedb.findByIdAndDelete(gameId);
             if (!deletedGame) return res.status(404).json({ message: "Game not found" });
 
             res.status(200).json({ message: "Game deleted successfully" });
