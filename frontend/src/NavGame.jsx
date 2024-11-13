@@ -25,6 +25,10 @@ const user = {
     imageUrl: "https://via.placeholder.com/150?text=Profile",
 };
 
+const handleSignOut = () => {
+    
+}
+
 const navigation = [
     { name: "Home", to: "/homePage", icon: UserIcon, current: false },
     { name: "Dashboard", to: "/gameDashboard", icon: MapIcon, current: true },
@@ -53,11 +57,15 @@ const NavGame = () => {
                                 <div className="flex h-16 items-center justify-between">
                                     <div className="flex items-center">
                                         <div className="flex-shrink-0">
-                                            <img
-                                                alt="Scavenger Hunt Logo"
-                                                src={mnnitlogo}
-                                                className="h-12 w-auto rounded-full   shadow-md mr-4"
-                                            />
+                                            <Link
+                                                to='/'
+                                            >
+                                                <img
+                                                    alt="Scavenger Hunt Logo"
+                                                    src={mnnitlogo}
+                                                    className="h-12 w-auto rounded-full   shadow-md mr-4"
+                                                />
+                                            </Link>
                                         </div>
                                         <div className="hidden md:block">
                                             <div className="ml-10 flex items-baseline space-x-4">
@@ -154,6 +162,11 @@ const NavGame = () => {
                                                     : "text-gray-300 hover:bg-yellow-500 hover:text-white",
                                                 "rounded-md px-3 py-2 text-base font-medium flex items-center space-x-2"
                                             )}
+                                            onClick={() => {
+                                                if (item.name === "Sign Out") {
+                                                    handleSignOut(); //Logic for signout.
+                                                }
+                                            }}
                                         >
                                             <item.icon className="h-5 w-5" aria-hidden="true" />
                                             <span>{item.name}</span>

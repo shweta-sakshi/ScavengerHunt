@@ -13,15 +13,16 @@ import GameDiscription from './GameDiscription.jsx'
 import GameDashboard from './GameDashboard.jsx'
 import UserProfile from './UserProfile.jsx'
 import MyGames from './MyGames.jsx'
-import Nav from './Nav.jsx'
 import Setting from './Setting.jsx'
 import CongratulationsPage from './CongratulationPage.jsx'
+import NavGame from './NavGame.jsx'
 
 
 function App() {
   return (
     <>
       <BrowserRouter>
+        <NavGame />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />

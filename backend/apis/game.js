@@ -2,24 +2,38 @@ const express = require("express");
 const router = new express.Router();
 const Gamedb = require('../models/gameSchema');
 const authenticate = require("../middleware/auth");
-const upload = require('../utils/uploadmedia')
+const upload = require('../middleware/multer')
+const uploadOnCloudinary = require('../utils/Cloudinary');
 
 module.exports = (io) => {
     // Create a new game
-    router.post('/create-game', authenticate, async (req, res) => {
+    router.post('/create-game', authenticate, upload.single("profileImageUrl"), async (req, res) => {
         try {
+            let cloudinaryResponse = null;
             const { GameTitle, Description, TimeRanges, tasks } = req.body;
 
+            if (req.file) {
+                const localFilePath = req.file.path;
+                // Upload the local file to Cloudinary
+
+                cloudinaryResponse = await uploadOnCloudinary(localFilePath);
+            }
+
             // Ensure tasks align with gameType and type field in task
-            validateTasksByGameType(tasks);
+            const tasksArray = JSON.parse(tasks);
+            validateTasksByGameType(tasksArray);
 
             const game = new Gamedb({
                 GameTitle,
                 Description,
                 Admin: req.userId,
-                TimeRanges,
-                tasks //{type and any one of location, image or question based data.}
+                TimeRanges: JSON.parse(TimeRanges),
+                tasks: JSON.parse(tasks)//{type and any one of location, image or question based data.}
             });
+
+            if (cloudinaryResponse) {
+                game.profileImageUrl = cloudinaryResponse.url;
+            }
 
             await game.save();
             console.log("Game created!!");

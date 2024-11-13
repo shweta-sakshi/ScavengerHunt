@@ -4,7 +4,6 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine';
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import NavGame from "./NavGame";
 import CongratulationPage from './CongratulationPage'
 
 const GameDescription = () => {
@@ -200,7 +199,6 @@ const GameDescription = () => {
 
   return exist ? (
     <>
-      <NavGame />
       <div className="bg-gray-900 h-screen text-white flex flex-col p-4">
         <div className="flex-1 flex flex-col items-center">
           {/* Show Game Detail */}
@@ -315,7 +313,6 @@ const GameDescription = () => {
     </>
   ) : (
     <>
-      <NavGame />
       <div className="bg-gray-900 h-screen text-white flex flex-col p-4">
         <div className="flex-1 flex flex-col items-center">
           <h1 className="text-2xl font-bold text-yellow-500 text-center">

@@ -24,7 +24,6 @@ const contestants = [
 const Leaderboard = () => {
   return (
     <>
-      <NavGame />
       <div className="min-h-screen bg-gray-800 p-6 flex flex-col items-center justify-center text-white">
         <h1 className="text-3xl font-bold text-yellow-400 mb-8 text-center">
           Leaderboard

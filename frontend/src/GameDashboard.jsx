@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import NavGame from "./NavGame";
 
 const GameDashboard = () => {
   const calculateDuration = (TimeRanges) => {
@@ -85,7 +84,6 @@ const GameDashboard = () => {
 
   return data ? (
     <>
-      <NavGame />
       <div className="bg-gray-900 min-h-screen text-white p-10 space-y-10 flex flex-col items-center">
         {/* Games To Play Section */}
         <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-screen-lg">
@@ -204,7 +202,6 @@ const GameDashboard = () => {
     </>
   ) : (
     <>
-      <NavGame />
       <div className="bg-gray-900 min-h-screen text-white p-8 space-y-8">
         <div className="bg-gray-800 p-5 rounded-lg shadow-lg">
           <h2 className="text-xl font-bold mb-4 text-yellow-400">No Game to play.</h2>

@@ -144,26 +144,43 @@ function GamePage() {
       }
     }
 
-    const gameData = {
-      GameTitle: gameName,
-      Description: gameDescription,
-      TimeRanges: [timeRange], // Single time range array
-      tasks: tasks.map(({ type, taskname, taskdescription, details }) => ({
-        type,
-        taskname,
-        taskdescription,
-        [type]: details, // Include the type-specific details
-      })),
-    };
+    // const gameData = {
+    //   GameTitle: gameName,
+    //   Description: gameDescription,
+    //   TimeRanges: [timeRange], // Single time range array
+    //   tasks: tasks.map(({ type, taskname, taskdescription, details }) => ({
+    //     type,
+    //     taskname,
+    //     taskdescription,
+    //     [type]: details, // Include the type-specific details
+    //   })),
+    // };
 
-    console.log(gameData);
+    const formData = new FormData();
+    formData.append("GameTitle", gameName);
+    formData.append("Description", gameDescription);
+    formData.append("profileImageUrl", document.querySelector('input[type="file"]').files[0]); // Add the actual file
+
+    formData.append("TimeRanges", JSON.stringify([timeRange]));
+    formData.append(
+      "tasks",
+      JSON.stringify(
+        tasks.map(({ type, taskname, taskdescription, details }) => ({
+          type,
+          taskname,
+          taskdescription,
+          [type]: details, // Include the type-specific details
+        }))
+      )
+    );
 
     const token = localStorage.getItem("usersdatatoken");
     try {
-      const response = await axios.post("/api/create-game", gameData,
+      const response = await axios.post("/api/create-game", formData,
         {
           headers: {
-            authorization: token
+            "Content-Type": "multipart/form-data",
+            authorization: token,
           }
         });
       console.log("Game created:", response.data);
