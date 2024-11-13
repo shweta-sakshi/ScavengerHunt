@@ -37,7 +37,7 @@ const userNavigation = [
   { name: "Sign out", href: "#" },
 ];
 
-function classNames(...classes) {
+function classNames(...classes) { 
   return classes.filter(Boolean).join(" ");
 }
 
@@ -151,7 +151,7 @@ const Nav = () => {
                         item.current
                           ? "bg-green-500 text-white"
                           : "text-gray-300 hover:bg-yellow-500 hover:text-white",
-                        "block rounded-md px-3 py-2 text-base font-medium flex items-center space-x-2"
+                        " rounded-md px-3 py-2 text-base font-medium flex items-center space-x-2"
                       )}
                     >
                       <item.icon className="h-5 w-5" aria-hidden="true" />
