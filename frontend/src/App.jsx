@@ -27,6 +27,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />
           <Route path="/homePage" element={<HomePage />} />
+          <Route path="/landingPage" element={<LandingPage/>}/>
           <Route path="/eventPage" element={<EventPage />} />
           <Route path="/gamePage" element={<GamePage />} />
           <Route path="/mygames" element={<MyGames />} />
