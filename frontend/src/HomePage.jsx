@@ -93,9 +93,11 @@ const Home = () => {
       <section className="bg-yellow-500 text-gray-900 py-16 px-6 text-center">
         <h1 className="text-4xl font-bold mb-4">Campus Scavenger Hunt</h1>
         <p className="text-lg mb-6">Explore, Compete, and Win on Campus!</p>
-        <button className="bg-gray-900 text-yellow-500 px-6 py-3 rounded-lg font-semibold shadow hover:bg-gray-800 transition-all">
+        <Link 
+          to="/eventPage"
+        className="bg-gray-900 text-yellow-500 px-6 py-3 rounded-lg font-semibold shadow hover:bg-gray-800 transition-all">
           Start the Hunt!
-        </button>
+        </Link>
       </section>
 
       {/* Active Scavenger Hunts */}

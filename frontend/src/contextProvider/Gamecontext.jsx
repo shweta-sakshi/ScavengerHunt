@@ -19,6 +19,7 @@ const Gamecontext = ({ children }) => {
                 },
             })
             .then((res) => {
+                console.log(res.data);
                 setGames(res.data);
                 setData(true);
             })

@@ -1,9 +1,16 @@
-
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import mnnitlogo2 from "./assets/mnnitlogo2.jpg";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const LandingPage = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <div
       className="min-h-screen flex flex-col bg-cover bg-center text-white overflow-hidden"
@@ -20,11 +27,18 @@ const LandingPage = () => {
           <img
             src={mnnitlogo2}
             alt="MNNIT GameZone Logo"
-            className="h-12 w-auto rounded-full  shadow-md mr-4"
+            className="h-12 w-auto rounded-full shadow-md mr-4"
           />
           <h1 className="text-2xl font-bold text-white">MNNIT GameZone</h1>
         </div>
-        <div className="space-x-4">
+
+        {/* Mobile Menu Icon */}
+        <div className="md:hidden text-2xl cursor-pointer" onClick={toggleMenu}>
+          {menuOpen ? <FaTimes /> : <FaBars />}
+        </div>
+
+        {/* Desktop Menu */}
+        <div className="hidden md:flex space-x-4">
           <Link
             to="/login"
             className="text-gray-200 hover:text-white font-medium"
@@ -39,6 +53,26 @@ const LandingPage = () => {
           </Link>
         </div>
       </motion.nav>
+
+      {/* Mobile Dropdown Menu */}
+      {menuOpen && (
+        <div className="md:hidden bg-blue-700 text-center p-4 space-y-2">
+          <Link
+            to="/login"
+            onClick={toggleMenu}
+            className="block text-gray-200 hover:text-white font-medium"
+          >
+            Sign In
+          </Link>
+          <Link
+            to="/register"
+            onClick={toggleMenu}
+            className="block px-4 py-2 bg-yellow-500 hover:bg-yellow-400 rounded-md font-medium text-gray-900"
+          >
+            Sign Up
+          </Link>
+        </div>
+      )}
 
       {/* Main Content */}
       <div className="flex-grow flex flex-col items-center justify-center text-center space-y-12 p-6 bg-gradient-to-t from-gray-900 to-gray-800">
@@ -77,7 +111,7 @@ const LandingPage = () => {
             “MNNIT GameZone connects us in a whole new way! The tasks make me
             feel closer to my college community and campus.”
           </blockquote>
-          <p className="text-right">- Shivangi Verma, Computer Science</p>
+          <p className="text-right">- Miss xyzabc</p>
         </div>
 
         {/* Newsletter Signup */}

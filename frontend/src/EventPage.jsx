@@ -67,9 +67,9 @@ const EventPage = () => {
         </section>
 
         {/* Start Game Button */}
-        <Link to="/start-game" className="mb-16">
+        <Link to="/gameDashboard" className="mb-16">
           <button className="px-8 py-4 text-2xl font-semibold bg-yellow-500 hover:bg-yellow-400 text-gray-900 rounded-md shadow-lg">
-            Start Game
+            Play/Create
           </button>
         </Link>
       </div>
