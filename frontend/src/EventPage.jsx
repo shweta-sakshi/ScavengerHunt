@@ -16,7 +16,7 @@ const EventPage = () => {
               Campus Scavenger Hunt
             </h1>
             <p className="text-lg md:text-xl max-w-3xl mx-auto">
-              Explore hidden spots, solve riddles, and compete against friends in
+              Explore hidden spots, solve riddles, find Images, and compete against friends in
               this thrilling campus-wide scavenger hunt!
             </p>
           </header>
@@ -26,9 +26,33 @@ const EventPage = () => {
             <h2 className="text-3xl font-bold mb-4 text-yellow-500">
               How to Play
             </h2>
+            <h3 className="text-xl text-left font-bold m-4 text-yellow-500">
+              Game 1(Location)
+            </h3>
+
             <ul className="text-left list-disc list-inside space-y-3 text-lg text-gray-300">
               <li>Follow the clues to find the next location.</li>
               <li>Each location unlocks a new riddle or task.</li>
+              <li>Complete tasks as quickly as possible to earn points.</li>
+              <li>The top players will be featured on the leaderboard.</li>
+              <li>Use hints if you are stuck, but they may cost points.</li>
+            </ul>
+            <h3 className="text-xl text-left font-bold m-4 text-yellow-500">
+              Game 2(Image)
+            </h3>
+
+            <ul className="text-left list-disc list-inside space-y-3 text-lg text-gray-300">
+              <li>Follow the clues to find the image.</li>
+              <li>Complete tasks as quickly as possible to earn points.</li>
+              <li>The top players will be featured on the leaderboard.</li>
+              <li>Use hints if you are stuck, but they may cost points.</li>
+            </ul>
+            <h3 className="text-xl text-left font-bold m-4 text-yellow-500">
+              Game 3(Question)
+            </h3>
+
+            <ul className="text-left list-disc list-inside space-y-3 text-lg text-gray-300">
+              <li>Follow the clues to answer the question asked.</li>
               <li>Complete tasks as quickly as possible to earn points.</li>
               <li>The top players will be featured on the leaderboard.</li>
               <li>Use hints if you are stuck, but they may cost points.</li>
