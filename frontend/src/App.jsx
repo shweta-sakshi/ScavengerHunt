@@ -22,7 +22,6 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <NavGame />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />

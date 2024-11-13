@@ -26,14 +26,37 @@ const user = {
 };
 
 const handleSignOut = () => {
-    
+    //getting value of token
+    let token = localStorage.getItem("userdatatoken");
+
+    //calling API
+    const res = fetch("/api/logout", {
+        method: "GET",
+        headers:
+        {
+            "Content-Type": "application/json",
+            "Authorization": token,
+            Accept: "application/json"
+        },
+        credentials: "include"
+    });
+
+    const data = res.json("");
+
+    if (data.status !== 201) {
+        //delete token form local storage.
+        console.log("user Logout")
+        localStorage.removeItem("userdatatoken");
+    } else {
+        console.log("Error");
+    }
 }
 
 const navigation = [
     { name: "Home", to: "/homePage", icon: UserIcon, current: false },
     { name: "Dashboard", to: "/gameDashboard", icon: MapIcon, current: true },
     { name: "My Games", to: "/mygames", icon: PuzzlePieceIcon, current: false },
-    { name: "Leaderboard", to: "/leaderboad", icon: TrophyIcon, current: false },
+    { name: "Create Game", to: "/gamePage", icon: TrophyIcon, current: false },
 ];
 
 const userNavigation = [

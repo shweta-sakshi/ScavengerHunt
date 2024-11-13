@@ -83,6 +83,7 @@ const MyGames = () => {
     return (
         data ? (
             <>
+                <NavGame />
                 <div className="bg-gray-900 min-h-screen text-white p-10 space-y-10 flex flex-col items-center">
                     {/* Joined Games Section */}
                     <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-screen-lg">
@@ -148,6 +149,7 @@ const MyGames = () => {
             </>
         ) : (
             <>
+                <NavGame />
                 <div className="bg-gray-900 min-h-screen text-white p-8 space-y-8">
                     <div className="bg-gray-800 p-5 rounded-lg shadow-lg">
                         <Link
