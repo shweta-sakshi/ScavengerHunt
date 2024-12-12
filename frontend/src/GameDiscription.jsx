@@ -23,13 +23,15 @@ const GameDescription = () => {
   const routeControlRef = useRef(null); // Reference for route control
   const destinationMarkerRef = useRef(null); // Reference for destination marker
   const [isComplete, setisComplete] = useState(false)
+  const [sumittedanswers, setSubmittedanswers] = useState()
 
   useEffect(() => {
+    const token = localStorage.getItem("usersdatatoken")
     axios
       .get(`/api/game/${id}`, {
         headers: {
           "Content-Type": "application/json",
-          authorization: localStorage.getItem("usersdatatoken"),
+          authorization: token,
         },
       })
       .then((res) => {
@@ -40,6 +42,20 @@ const GameDescription = () => {
         setexist(false)
         console.error("Failed to fetch game data:", err);
       });
+
+
+    axios.get(`/api/submitted-answer/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        authorization: token,
+      },
+    }).then((res) => {
+      console.log(res.data.submittedanswer);
+      setSubmittedanswers(res.data.submittedanswer)
+    }).catch((error) => {
+      console.log(error);
+    })
+
   }, [id, exist]);
 
   const openDialog = (index) => {
@@ -242,7 +258,7 @@ const GameDescription = () => {
             </h1>
             {/* <p className="mt-4">{game.Description}</p>
 
-            {game.tasks.map((task, index) => (
+            {sumittedanswers.tasks.map((task, index) => (
               <div key={index} className="mt-6">
                 <h3 className="text-xl text-yellow-500">{index + 1}. {task.taskname}</h3>
                 <p>{task.taskdescription}</p>

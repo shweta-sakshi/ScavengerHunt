@@ -33,12 +33,14 @@ router.post('/submit-answer', authenticate, async (req, res) => {
     }
 });
 
-// router.get('/submitted-answer', authenticate, async(req, res)=>{
-//     try {
-//         const submission = await solutiondb.findOne({ gameId: gameId, userId: req.userId, taskId: taskId });
-//     } catch (error) {
-
-//     }
-// })
+router.get('/submitted-answer/:id', authenticate, async (req, res) => {
+    try {
+        const id = req.params.id
+        const submittedanswer = await solutiondb.find({ gameId: id, userId: req.userId });
+        res.status(200).json({ submittedanswer });
+    } catch (error) {
+        res.status(500).json({ message: "error in fetching submission.", error: error.message });
+    }
+})
 
 module.exports = router;

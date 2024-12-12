@@ -62,22 +62,19 @@ const MyGames = () => {
             });
     }, [data]);
 
-    const [gameId, setGameId] = useState();
-    const handleDeleteGame = () => {
-        axios.delete(`/api/delete-games/${gameId}`, {
+    const handleDeleteGame = async (gid) => {
+        await axios.delete(`/api/delete-games/${gid}`, {
             headers: {
                 "Content-Type": "application/json",
                 authorization: localStorage.getItem("usersdatatoken")
             },
         }).then((res) => {
             console.log(res);
-            setGames((prevGames) => prevGames.filter((game) => game._id !== gameId));
+            setGames((prevGames) => prevGames.filter((game) => game._id !== gid));
             alert(`Game Deleted`);
         }).catch((err) => {
             console.error("Error deleting game:", err);
         })
-
-        setGameId("");
     };
 
     return (
@@ -92,8 +89,7 @@ const MyGames = () => {
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center">
                             {games.map((game) => {
-                                const { label, days, hours, minutes, seconds, duration } =
-                                    calculateDuration(game.TimeRanges);
+                                const { label, days, hours, minutes, seconds, duration } = calculateDuration(game.TimeRanges);
                                 return (
                                     <div
                                         key={game._id}
@@ -126,7 +122,7 @@ const MyGames = () => {
                                                     </p>
                                                 </div>
                                                 <button
-                                                    onClick={handleDeleteGame}
+                                                    onClick={() => handleDeleteGame(game._id)}
                                                     className="bg-red-500 hover:bg-red-600 transition-colors duration-300 px-4 py-2 rounded-md text-white mt-4 font-semibold text-center"
                                                 >
                                                     Delete

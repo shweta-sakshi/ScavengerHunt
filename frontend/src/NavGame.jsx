@@ -13,11 +13,14 @@ import {
     PuzzlePieceIcon,
     UserIcon,
     BellIcon,
+    PlusIcon,
+    GlobeAltIcon
 } from "@heroicons/react/24/outline";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import React from "react";
 import mnnitlogo from "./assets/mnnitlogo.jpg"
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const user = {
     name: "Tom Cook",
@@ -25,30 +28,25 @@ const user = {
     imageUrl: "https://via.placeholder.com/150?text=Profile",
 };
 
-const handleSignOut = () => {
-    //getting value of token
-    let token = localStorage.getItem("userdatatoken");
+const handleSignOut = async () => {
+    try {
+        const token = localStorage.getItem("usersdatatoken");
 
-    //calling API
-    const res = fetch("/api/logout", {
-        method: "GET",
-        headers:
-        {
-            "Content-Type": "application/json",
-            "Authorization": token,
-            Accept: "application/json"
-        },
-        credentials: "include"
-    });
+        // Call API for logout
+        const res = await axios.get('/api/logout', {
+            headers: {
+                authorization: token,
+            },
+        });
 
-    const data = res.json("");
-
-    if (data.status !== 201) {
-        //delete token form local storage.
-        console.log("user Logout")
-        localStorage.removeItem("userdatatoken");
-    } else {
-        console.log("Error");
+        if (res.status === 201) {
+            console.log("User logged out successfully");
+            localStorage.removeItem("usersdatatoken");
+        } else {
+            console.error("Failed to log out:", res.data);
+        }
+    } catch (error) {
+        console.error("Logout error:", error);
     }
 }
 
@@ -56,7 +54,8 @@ const navigation = [
     { name: "Home", to: "/homePage", icon: UserIcon, current: false },
     { name: "Dashboard", to: "/gameDashboard", icon: MapIcon, current: true },
     { name: "My Games", to: "/mygames", icon: PuzzlePieceIcon, current: false },
-    { name: "Create Game", to: "/gamePage", icon: TrophyIcon, current: false },
+    { name: "Play Online", to: "/onlinegame", icon: GlobeAltIcon, current: false },
+    { name: "Create Game", to: "/gamePage", icon: PlusIcon, current: false },
 ];
 
 const userNavigation = [
@@ -136,6 +135,11 @@ const NavGame = () => {
                                                             {({ active }) => (
                                                                 <Link
                                                                     to={item.to}
+                                                                    onClick={() => {
+                                                                        if (item.name === "Sign out") {
+                                                                            handleSignOut();
+                                                                        }
+                                                                    }}
                                                                     className={classNames(
                                                                         active
                                                                             ? "bg-yellow-500 text-gray-900"
@@ -185,11 +189,6 @@ const NavGame = () => {
                                                     : "text-gray-300 hover:bg-yellow-500 hover:text-white",
                                                 "rounded-md px-3 py-2 text-base font-medium flex items-center space-x-2"
                                             )}
-                                            onClick={() => {
-                                                if (item.name === "Sign Out") {
-                                                    handleSignOut(); //Logic for signout.
-                                                }
-                                            }}
                                         >
                                             <item.icon className="h-5 w-5" aria-hidden="true" />
                                             <span>{item.name}</span>

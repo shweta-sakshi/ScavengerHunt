@@ -169,19 +169,18 @@ router.get("/validuser", authenticate, async (req, res) => {
 
 //user signout
 //if user doesn't have token then we can't logout them
-
 router.get("/logout", authenticate, async (req, res) => {
     try {
 
         //clear token
         req.rootUser.tokens = req.rootUser.tokens.filter((curelem) => {
-            return curelem.token !== req.token
+            return curelem.token !== req.headers.authorization
         });
 
         //clear cookie
-        const cookies = Object.keys(req.cookies);
-        cookies.forEach(cookie => {
-            res.clearCookie(cookie, { path: "/" });
+        const cookies = Object.keys(req.headers.cookie);
+        cookies.forEach(it => {
+            res.clearCookie(it, { path: "/" });
         });
 
         try {
@@ -193,6 +192,7 @@ router.get("/logout", authenticate, async (req, res) => {
         res.status(201).json({ status: 201 });
 
     } catch (error) {
+        console.log(error)
         res.status(401).json({ status: 401, error });
     }
 });

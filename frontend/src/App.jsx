@@ -15,8 +15,7 @@ import UserProfile from './UserProfile.jsx'
 import MyGames from './MyGames.jsx'
 import Setting from './Setting.jsx'
 import CongratulationsPage from './CongratulationPage.jsx'
-import NavGame from './NavGame.jsx'
-
+import Onlinegame from './Onlinegame.jsx'
 
 function App() {
   return (
@@ -27,7 +26,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />
           <Route path="/homePage" element={<HomePage />} />
-          <Route path="/landingPage" element={<LandingPage/>}/>
+          <Route path="/landingPage" element={<LandingPage />} />
           <Route path="/eventPage" element={<EventPage />} />
           <Route path="/gamePage" element={<GamePage />} />
           <Route path="/mygames" element={<MyGames />} />
@@ -36,6 +35,7 @@ function App() {
           <Route path="/leaderboad" element={<Leaderboad />} />
           <Route path="/gameDashboard" element={<GameDashboard />} />
           <Route path="/gameDiscription/:id" element={<GameDiscription />} />
+          <Route path="/onlinegame" element={<Onlinegame />} />
           <Route path="/userProfile" element={<UserProfile />} />
           <Route path="/setting" element={<Setting />} />
           <Route
