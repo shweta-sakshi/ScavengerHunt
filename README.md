@@ -1,1 +1,1 @@
-# NITA_HUNT
+# ScavengerHunt Game
